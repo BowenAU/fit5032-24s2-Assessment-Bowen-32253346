@@ -1,6 +1,8 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { role as Role } from '../router/index'
+import { username as Username} from '../router/index'
 
 const router = useRouter()
 
@@ -70,6 +72,8 @@ const submitForm = () => {
         })
         localStorage.setItem('users', JSON.stringify(users))
         alert('Success!')
+        Role.value = role
+        Username.value = username
         router.push('/')
     }
     //if it matches, the user is allowed to log in and jump to the home page
@@ -80,15 +84,28 @@ const errors = ref({
     password: null,
     confirmPassword: null,
 })
+
+const clearForm = () => {
+    formData.value = {
+        username: '',
+        password: '',
+        confirmPassword: '',
+    }
+}
+
+
 </script>
 
 <template>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <h1 class="text-center">Sign Up Form</h1>
+                <h1 class="text-center">Sign Up</h1>
                 <p class="text-center">
-                    Allow user to sign up to our system
+                    Make it Happen
+                </p>
+                <p class="text-center">
+                    Join now
                 </p>
                 <form @submit.prevent="submitForm">
                     <div class="row mb-3">

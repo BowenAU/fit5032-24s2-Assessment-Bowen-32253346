@@ -1,7 +1,8 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { role } from '../router/index'
+import { username as Username} from '../router/index'
 
 const router = useRouter()
 
@@ -55,6 +56,7 @@ const submitForm = () => {
         //If it matches, the user is allowed to log in and redirect to the home page
         //redirect
         role.value = user.role
+        Username.value = user.username
         router.push({ name: 'home' })
     } else {
         //otherwise, a login failure message is displayed

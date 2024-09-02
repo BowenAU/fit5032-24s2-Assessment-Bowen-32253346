@@ -6,9 +6,21 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <!-- page layout -->
   <!-- navbar -->
-  <RouterLink to="/login">Login</RouterLink>
-  <RouterLink to="/signup">Sign Up</RouterLink>
-  <RouterLink to="/">Home Page</RouterLink>
+  <RouterLink to="/login">
+    <div class="badge text-bg-primary text-wrap" style="width: 6rem;">
+      Log in
+    </div>
+  </RouterLink>
+  <RouterLink to="/signup">
+    <div class="badge text-bg-primary text-wrap" style="width: 6rem;">
+      Sign Up
+    </div>
+  </RouterLink>
+  <RouterLink to="/">
+    <div class="badge text-bg-primary text-wrap" style="width: 6rem;">
+      Home Page
+    </div>
+  </RouterLink>
   <!-- page content based on current url -->
   <RouterView />
 </template>
