@@ -76,7 +76,7 @@ const errors = ref({
             <div class="col-md-8 offset-md-2">
                 <h1 class="text-center">MigrantCare</h1>
                 <p class="text-center">
-                    Allow user to login to our MigrantCare system
+                    Welcome to log in MigrantCare
                 </p>
                 <form @submit.prevent="submitForm">
                     <div class="row mb-3">
