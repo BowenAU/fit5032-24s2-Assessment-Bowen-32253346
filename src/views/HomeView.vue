@@ -3,7 +3,7 @@ import { role, username } from '../router/index'
 import { ref } from 'vue'
 import Rating from 'primevue/rating'
 
-// 独立的 rating 值为每个新闻和课程创建
+// separate rating values are created for each news and course
 const healthNews = ref([
   {
     title: 'How to Access Healthcare Services in Australia',
@@ -137,7 +137,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* 确保文字和Rating组件垂直居中 */
+/* text and rating component are centered vertically */
 .row.align-items-center {
   display: flex;
   align-items: center;
