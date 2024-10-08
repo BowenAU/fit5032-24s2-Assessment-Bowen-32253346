@@ -43,7 +43,7 @@ const recommendedCourses = ref([
     <!-- Welcome message -->
     <section class="welcome-section">
       <h1>Welcome, {{ username }}!</h1>
-      <p>Your current role is: {{ role }}</p >
+      <p>Your current role is: {{ role }}</p>
     </section>
 
     <!-- Health News -->
@@ -57,7 +57,7 @@ const recommendedCourses = ref([
                 <div class="container text-center">
                   <div class="row align-items-center">
                     <div class="col-6">
-                      <a :href="news.link">{{ news.title }}</a >
+                      <a :href="news.link">{{ news.title }}</a>
                     </div>
                     <div class="col-6">
                       <Rating v-model="news.rating" />
@@ -79,9 +79,9 @@ const recommendedCourses = ref([
                   <div class="row align-items-center">
                     <div class="col-6">
                       <a :href="course.link">
-                        <p>{{ course.name }}</p >
-                        <p>{{ course.description }}</p >
-                      </a >
+                        <p>{{ course.name }}</p>
+                        <p>{{ course.description }}</p>
+                      </a>
                     </div>
                     <div class="col-6">
                       <Rating v-model="course.rating" />
