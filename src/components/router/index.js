@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../../views/HomeView.vue'
-import LoginView from '../../views/LoginView.vue'
-import SignUpView from '../../views/SignUpView.vue'
+import HomeView from '../views/HomeView.vue'
+import LoginView from '../views/LoginView.vue'
+import SignUpView from '../views/SignUpView.vue'
 import { ref } from 'vue'
 
 const role = ref('')
@@ -38,6 +38,14 @@ const router = createRouter({
     }
     
   ]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+})
+  
+  export { isAuthenticated }
+
 })
 export { role, username }
 export default router

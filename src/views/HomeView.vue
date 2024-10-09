@@ -1,5 +1,5 @@
 <script setup>
-import { role, username } from '../router/index'
+import { role, username } from '../components/router/index'
 import { ref } from 'vue'
 import Rating from 'primevue/rating'
 
