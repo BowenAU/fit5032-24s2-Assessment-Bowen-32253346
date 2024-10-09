@@ -32,6 +32,11 @@
               <div class="badge text-bg-primary text-wrap">About</div>
             </router-link>   
           </li>
+          <li class="nav-item">
+            <router-link to="/tell">
+              <div class="badge text-bg-primary text-wrap">Tell</div>
+            </router-link>   
+          </li>
         </ul>
       </header>
   

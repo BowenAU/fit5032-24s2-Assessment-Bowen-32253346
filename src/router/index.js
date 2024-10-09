@@ -7,6 +7,7 @@ import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import RatingView from '@/views/RatingView.vue'
 import AboutView from '@/views/AboutView.vue'
+import TellView from '@/views/TellView.vue'
 
 const role = ref('')
 const username = ref('')
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: AboutView
+    },
+        {
+      path: '/tell',
+      name: 'tell',
+      component: TellView
     },
     // {
     //   path: '/',
