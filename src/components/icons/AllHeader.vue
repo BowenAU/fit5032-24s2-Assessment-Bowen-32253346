@@ -13,8 +13,13 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/">
+            <router-link to="/homepage">
               <div class="badge text-bg-primary text-wrap" style="width: 6rem">Home Page</div>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/admin">
+              <div class="badge text-bg-primary text-wrap" style="width: 6rem">Admin Panel View Page</div>
             </router-link>
           </li>
         </ul>

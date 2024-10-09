@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../../views/HomeView.vue'
-import LoginView from '../../views/LoginView.vue'
-import SignUpView from '../../views/SignUpView.vue'
 import { ref } from 'vue'
+
+import AdminPanelView from '@/views/AdminPanelView.vue'
+import HomeView from '@/views/HomeView.vue'
+import LoginView from '@/views/LoginView.vue'
+import SignUpView from '@/views/SignUpView.vue'
 
 const role = ref('')
 const username = ref('')
