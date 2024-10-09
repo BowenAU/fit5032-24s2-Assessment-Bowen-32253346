@@ -8,6 +8,7 @@ import SignUpView from '@/views/SignUpView.vue'
 
 const role = ref('')
 const username = ref('')
+const isAuthenticated = ref(false)
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,6 +27,16 @@ const router = createRouter({
       name: 'signup',
       component: SignUpView
     },
+    // {
+    //   path: '/signup',
+    //   name: 'signup',
+    //   component: SignUpView
+    // },
+    // {
+    //   path: '/signup',
+    //   name: 'signup',
+    //   component: SignUpView
+    // },
     {
       path: '/admin',
       name: 'AdminPanel',
