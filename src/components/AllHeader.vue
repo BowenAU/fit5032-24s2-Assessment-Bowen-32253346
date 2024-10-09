@@ -13,8 +13,8 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/homepage">
-              <div class="badge text-bg-primary text-wrap" style="width: 6rem">Home Page</div>
+            <router-link to="/">
+              <div class="badge text-bg-primary text-wrap" style="width: 6rem">Home</div>
             </router-link>
           </li>
           <li class="nav-item">
@@ -26,6 +26,11 @@
             <router-link to="/rating">
               <div class="badge text-bg-primary text-wrap" style="width: 6rem">Rating</div>
             </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/about">
+              <div class="badge text-bg-primary text-wrap">About</div>
+            </router-link>   
           </li>
         </ul>
       </header>

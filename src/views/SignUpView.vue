@@ -1,22 +1,22 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { role as Role } from '../router/index'
-import { username as Username } from '../router/index'
+import {getAuth, createUserWithEmailAndPassword} from "firebase/auth"
+
 
 const router = useRouter()
 
 const formData = ref({
-  username: '',
+  email: '',
   password: '',
   confirmPassword: ''
 })
 
-const validateName = (blur) => {
-  if (formData.value.username.length < 3) {
-    if (blur) errors.value.username = 'Name must be at least 3 characters'
+const validateEmail = (blur) => {
+  if (formData.value.email.length < 10) {
+    if (blur) errors.value.email = 'Please input right Email'
   } else {
-    errors.value.username = null
+    errors.value.email = null
   }
 }
 
@@ -51,43 +51,33 @@ const validateConfirmPassword = (blur) => {
 }
 const submitForm = () => {
   //validate the user name is valid
-  validateName(true)
+  validateEmail(true)
   //validate the password is valid
   validatePassword(true)
   //after the authentication is successful, the user information is stored in the localStorage
-  const username = formData.value.username
+  const email = formData.value.email
   const pwd = formData.value.password
-  //gets a value from the form data
-  let users = JSON.parse(localStorage.getItem('users')) || []
-  const isExist = users.some((user) => user.username === username)
-  if (isExist) {
-    alert('User Name has been used')
-    clearForm()
-  } else {
-    const role = username.toLowerCase().includes('volunteer') ? 'volunteer' : 'users'
-    users.push({
-      username: username,
-      password: pwd,
-      role: role
-    })
-    localStorage.setItem('users', JSON.stringify(users))
-    alert('Success!')
-    Role.value = role
-    Username.value = username
-    router.push('/')
-  }
+  console.log(email, pwd);
   //if it matches, the user is allowed to log in and jump to the home page
   //otherwise, a login failure message is displayed
+const auth = getAuth()
+createUserWithEmailAndPassword(auth, email, pwd)
+.then((data) => {
+  console.log("Firebase Register Successful!")
+  router.push('/about')
+}).catch((error) => {
+  console.log(error.code);
+})  
 }
 const errors = ref({
-  username: null,
+  email: null,
   password: null,
   confirmPassword: null
 })
 
 const clearForm = () => {
   formData.value = {
-    username: '',
+    email: '',
     password: '',
     confirmPassword: ''
   }
@@ -104,16 +94,16 @@ const clearForm = () => {
         <form @submit.prevent="submitForm">
           <div class="row mb-3">
             <div class="col-md-6 col-sm-6 offset-3">
-              <label for="username" class="form-label">Username</label>
+              <label for="email" class="form-label">Email</label>
               <input
                 type="text"
                 class="form-control"
-                id="username"
-                @blur="() => validateName(true)"
-                @input="() => validateName(false)"
-                v-model="formData.username"
+                id="email"
+                @blur="() => validateEmail(true)"
+                @input="() => validateEmail(false)"
+                v-model="formData.email"
               />
-              <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
+              <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
             </div>
           </div>
           <div class="row mb-3">

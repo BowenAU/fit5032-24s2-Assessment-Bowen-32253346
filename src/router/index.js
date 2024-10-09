@@ -6,6 +6,7 @@ import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import RatingView from '@/views/RatingView.vue'
+import AboutView from '@/views/AboutView.vue'
 
 const role = ref('')
 const username = ref('')
@@ -33,10 +34,15 @@ const router = createRouter({
       name: 'Rating',
       component: RatingView
     },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutView
+    },
     // {
-    //   path: '/signup',
-    //   name: 'signup',
-    //   component: SignUpView
+    //   path: '/',
+    //   name: '',
+    //   component: 
     // },
     {
       path: '/admin',

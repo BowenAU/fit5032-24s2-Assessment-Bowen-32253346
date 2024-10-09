@@ -1,21 +1,20 @@
 <script setup>
 import { ref } from 'vue'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
-import { role } from '../router/index'
-import { username as Username } from '../router/index'
 
 const router = useRouter()
 
 const formData = ref({
-  username: '',
+  email: '',
   password: ''
 })
 
-const validateName = (blur) => {
-  if (formData.value.username.length < 3) {
-    if (blur) errors.value.username = 'Name must be at least 3 characters'
+const validateEmail = (blur) => {
+  if (formData.value.email.length < 10) {
+    if (blur) errors.value.email = 'Please input right email'
   } else {
-    errors.value.username = null
+    errors.value.email = null
   }
 }
 
@@ -43,30 +42,26 @@ const validatePassword = (blur) => {
 }
 const submitForm = () => {
   //validate the user name is valid
-  validateName(true)
+  validateEmail(true)
   //validate the password is valid
   validatePassword(true)
-  //validate that the user name and password match
-  const users = JSON.parse(localStorage.getItem('users')) || []
-  const username = formData.value.username
+  const email = formData.value.email
   const pwd = formData.value.password
-  const user = users.find((user) => user.username === username && user.password === pwd)
-  if (user) {
-    alert('success!')
-    //If it matches, the user is allowed to log in and redirect to the home page
-    //redirect
-    role.value = user.role
-    Username.value = user.username
-    router.push({ name: 'home' })
-  } else {
-    //otherwise, a login failure message is displayed
-    alert('Login info wrong, please check your username or password')
-  }
-}
+
+  const auth = getAuth()
+  signInWithEmailAndPassword(getAuth(), email, pwd)
+  .then((data) => {
+    console.log("Firebase Register successful!")
+    router.push('/about')
+    console.log(auth.currentUser) //To check the current User signed in
+  }).catch((error) => {
+    console.log(error.code);
+
+  })
+  } ;
 const errors = ref({
-  username: null,
+  email: null,
   password: null,
-  confirmPassword: null
 })
 </script>
 
@@ -79,16 +74,16 @@ const errors = ref({
         <form @submit.prevent="submitForm">
           <div class="row mb-3">
             <div class="col-md-6 col-sm-6 offset-3">
-              <label for="username" class="form-label">Username</label>
+              <label for="email" class="form-label">Email</label>
               <input
                 type="text"
                 class="form-control"
-                id="username"
-                @blur="() => validateName(true)"
-                @input="() => validateName(false)"
-                v-model="formData.username"
+                id="email"
+                @blur="() => validateEmail(true)"
+                @input="() => validateEmail(false)"
+                v-model="formData.email"
               />
-              <div v-if="errors.username" class="text-danger">{{ errors.username }}</div>
+              <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
             </div>
           </div>
           <div class="row mb-3">
