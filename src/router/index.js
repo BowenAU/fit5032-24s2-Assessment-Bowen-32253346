@@ -5,6 +5,7 @@ import AdminPanelView from '@/views/AdminPanelView.vue'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
+import RatingView from '@/views/RatingView.vue'
 
 const role = ref('')
 const username = ref('')
@@ -27,11 +28,11 @@ const router = createRouter({
       name: 'signup',
       component: SignUpView
     },
-    // {
-    //   path: '/signup',
-    //   name: 'signup',
-    //   component: SignUpView
-    // },
+    {
+      path: '/rating',
+      name: 'Rating',
+      component: RatingView
+    },
     // {
     //   path: '/signup',
     //   name: 'signup',
@@ -41,13 +42,7 @@ const router = createRouter({
       path: '/admin',
       name: 'AdminPanel',
       component: AdminPanelView,
-      beforeEnter: (to, from, next) => {
-        if (isAuthenticated.value.role !== 'admin') {
-          next({ name: 'Login' })
-        } else {
-          next()
-        }
-      }
+      
     }
     
   ]

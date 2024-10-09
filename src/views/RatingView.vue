@@ -1,7 +1,8 @@
 <script setup>
-import { role, username } from '../components/router/index'
+import { role, username } from '../router/index'
 import { ref } from 'vue'
 import Rating from 'primevue/rating'
+
 
 // separate rating values are created for each news and course
 const healthNews = ref([

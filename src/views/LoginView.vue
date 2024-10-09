@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { role } from '../components/router/index'
-import { username as Username } from '../components/router/index'
+import { role } from '../router/index'
+import { username as Username } from '../router/index'
 
 const router = useRouter()
 

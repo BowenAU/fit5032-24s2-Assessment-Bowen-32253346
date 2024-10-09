@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <header class="d-flex justify-content-center py-3">
+      <header class="d-flex justify-content-center">
         <ul class="nav nav-pills">
           <li class="nav-item" v-if="!isAuthenticated">
             <router-link to="/login">
@@ -19,14 +19,17 @@
           </li>
           <li class="nav-item">
             <router-link to="/admin">
-              <div class="badge text-bg-primary text-wrap" style="width: 6rem">Admin Panel View Page</div>
+              <div class="badge text-bg-primary text-wrap">Admin Panel View Page</div>
+            </router-link>   
+          </li>
+          <li class="nav-item">
+            <router-link to="/rating">
+              <div class="badge text-bg-primary text-wrap" style="width: 6rem">Rating</div>
             </router-link>
           </li>
         </ul>
       </header>
   
-      <!-- Page content based on the current URL -->
-      <router-view />
     </div>
   </template>
   
