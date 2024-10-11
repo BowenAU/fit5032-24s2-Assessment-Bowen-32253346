@@ -18,12 +18,7 @@
 
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea
-            v-model="form.message"
-            id="message"
-            placeholder="Your Message"
-            required
-          ></textarea>
+          <textarea v-model="form.message" id="message" placeholder="Your Message" required></textarea>
         </div>
 
         <button type="submit" class="submit-button">Send Message</button>
@@ -33,9 +28,9 @@
     <!-- Contact Information -->
     <section class="contact-info-section">
       <h2>Our Contact Information</h2>
-      <p><strong>Phone:</strong> (61) 0431 666 861</p>
-      <p><strong>Email:</strong> <a href="mailto:info@ourcharity.org">Bowen@ourcharity.org</a></p>
-      <p><strong>Address:</strong> Wellington Rd, Clayton VIC 3168</p>
+      <p><strong>Phone:</strong> (61) 0431 666 861</p >
+      <p><strong>Email:</strong> <a href=" ">Bowen@ourcharity.org</a ></p >
+      <p><strong>Address:</strong> Wellington Rd, Clayton VIC 3168</p >
     </section>
 
     <!-- Map Section -->
@@ -105,33 +100,17 @@ export default {
     },
     // 根据自定义的起点和终点显示路线
     async getCustomDirections() {
-      const geocoderStart = new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
-      })
-      const geocoderEnd = new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
-      })
+      const startPoint = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${this.customStart}.json?access_token=${mapboxgl.accessToken}`)
+      const endPoint = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${this.customEnd}.json?access_token=${mapboxgl.accessToken}`)
 
-      // 将用户输入的起点和终点转换为坐标
-      geocoderStart.query(this.customStart)
-      geocoderEnd.query(this.customEnd)
+      const startCoordiantes = startPoint.data.features[0].center
+      const endCoordiantes = endPoint.data.features[0].center
 
-      geocoderStart.on('result', async (e) => {
-        const startCoordinates = e.result.center
+      const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${startCoordiantes};${endCoordiantes}?geometries=geojson&access_token=${mapboxgl.accessToken}`
+      const response = await axios.get(url)
+      const data = response.data.routes[0].geometry
 
-        geocoderEnd.on('result', async (f) => {
-          const endCoordinates = f.result.center
-
-          // 获取路线
-          const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${startCoordinates};${endCoordinates}?geometries=geojson&access_token=${mapboxgl.accessToken}`
-          const response = await axios.get(url)
-          const data = response.data.routes[0].geometry
-
-          this.displayRoute(data)
-        })
-      })
+      this.displayRoute(data)
     },
     // 显示路线
     displayRoute(data) {
