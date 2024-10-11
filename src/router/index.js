@@ -9,13 +9,14 @@ import AboutView from '@/views/AboutView.vue'
 import InformView from '@/views/InformView.vue'
 import ReviewView from '@/views/ReviewView.vue'
 import ServiceView from '@/views/ServiceView.vue'
-import FindUsView from '@/views/FindUsView.vue'
 
-// 你可以使用相对路径导入子服务视图
+
 import LanguageLearningView from '../views/services/LanguageLearningView.vue'
 import CareerResourcesView from '../views/services/CareerResourcesView.vue'
 import HealthInfoView from '../views/services/HealthInfoView.vue'
 import CulturalIntegrationView from '../views/services/CulturalIntegrationView.vue'
+import ContactUsView from '@/views/ContactUsView.vue'
+import AskUsView from '@/views/AskUsView.vue'
 
 const role = ref('')
 const username = ref('')
@@ -84,7 +85,12 @@ const router = createRouter({
     {
       path: '/findus',
       name: 'findus',
-      component: FindUsView
+      component: ContactUsView
+    },
+    {
+      path: '/askus',
+      name: 'askus',
+      component: AskUsView
     },
     {
       path: '/admin',
