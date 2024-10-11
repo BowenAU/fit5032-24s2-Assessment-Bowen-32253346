@@ -21,7 +21,6 @@
     <div class="about-team">
       <h2>Our Team</h2>
       <div class="team-member" v-for="member in team" :key="member.id">
-        <!-- Using relative path to include images -->
         <img :src="getImagePath(member.image)" :alt="member.name" class="member-photo" />
         <div class="member-info">
           <h3>{{ member.name }} - {{ member.position }}</h3>
@@ -30,16 +29,6 @@
       </div>
     </div>
 
-    <div class="contact-us">
-      <h2>Contact Us</h2>
-      <p>
-        If you have any questions or need further information, please contact us through the
-        following methods:
-        <br />Phone: (61) 0431 666 861 <br />Email:
-        <a href="mailto:info@ourcharity.org">Bowen@charity.org</a>
-      </p>
-      <button class="contact-button" @click="contactUs">Contact Us</button>
-    </div>
   </section>
 </template>
 
@@ -55,7 +44,7 @@ export default {
           position: 'Founder & CEO',
           description:
             'With over 15 years of cross-cultural communication and nonprofit management experience, dedicated to helping immigrant communities.',
-          image: 'Mr_Wang.webp' // Using relative path
+          image: 'Mr_Wang.webp'
         },
         {
           id: 2,
@@ -79,9 +68,6 @@ export default {
   methods: {
     getImagePath(imageName) {
       return new URL(`../assets/${imageName}`, import.meta.url).href
-    },
-    contactUs() {
-      alert('We will contact you soon!')
     }
   }
 }
@@ -89,104 +75,98 @@ export default {
 
 <style scoped>
 .about-us {
-  padding: 40px 20px;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  padding: 60px 20px;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
 }
 
 .about-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 .about-header h1 {
-  font-size: 3em;
-  color: #333;
+  font-size: 3.5em;
+  color: #00796b;
 }
 
 .about-header p {
-  font-size: 1.2em;
-  color: #555;
+  font-size: 1.3em;
+  color: #004d40;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 700px;
 }
 
 .about-vision {
   text-align: center;
-  margin: 50px 0;
+  margin: 60px 0;
 }
 
 .about-vision h2 {
-  font-size: 2em;
-  color: #444;
+  font-size: 2.5em;
+  color: #00796b;
 }
 
 .about-vision p {
-  font-size: 1.1em;
-  color: #666;
+  font-size: 1.2em;
+  color: #004d40;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 650px;
 }
 
 .about-team {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  margin: 40px 0;
+  margin: 50px 0;
 }
 
 .team-member {
-  width: 300px;
+  width: 280px;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .member-photo {
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  border: 3px solid #004d40;
 }
 
 .member-info h3 {
-  font-size: 1.5em;
-  color: #333;
+  font-size: 1.6em;
+  color: #00695c;
 }
 
 .member-info p {
-  font-size: 1em;
-  color: #666;
-}
-
-.contact-us {
-  text-align: center;
-  margin: 40px 0;
-}
-
-.contact-us h2 {
-  font-size: 2em;
-  color: #444;
-}
-
-.contact-us p {
   font-size: 1.1em;
-  color: #666;
+  color: #004d40;
+  line-height: 1.5;
 }
 
-.contact-button {
-  background-color: #0066cc;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s;
-}
+@media (max-width: 768px) {
+  .about-header h1 {
+    font-size: 2.8em;
+  }
 
-.contact-button:hover {
-  background-color: #005bb5;
+  .about-header p {
+    font-size: 1.1em;
+  }
+
+  .about-vision h2 {
+    font-size: 2.2em;
+  }
+
+  .about-vision p {
+    font-size: 1em;
+  }
+
+  .team-member {
+    width: 100%;
+    padding: 20px;
+  }
 }
 </style>
