@@ -70,6 +70,7 @@ export default {
 }
 </script>
 
+
 <style scoped>
 /* 确保下拉菜单项的背景色与导航栏一致 */
 .dropdown-item {
@@ -78,44 +79,56 @@ export default {
   border: none !important; /* 移除边框 */
   box-shadow: none !important; /* 移除可能的阴影效果 */
   padding: 10px 20px; /* 调整内边距 */
-  display: block;
   text-align: left;
 }
 
 /* 悬停时的颜色和背景颜色 */
 .dropdown-item:hover {
-  background-color: #0056b3 !important; /* 深蓝色背景 */
+  background-color: #0056b3 !important; /* 悬停时的深蓝色背景 */
   color: #ffc107 !important; /* 悬停时的文字颜色 */
 }
 
-/* 移除整个菜单的白色边框 */
+/* 确保整个菜单的样式 */
 .b-nav-item-dropdown .dropdown-menu {
-  border: none !important; /* 移除下拉菜单的边框 */
-  box-shadow: none !important; /* 移除阴影 */
+  background-color: #007bff !important; /* 设置整个下拉菜单背景为蓝色 */
+  border: none !important; /* 移除边框 */
+  box-shadow: none !important; /* 移除阴影效果 */
 }
 
-/* 确保菜单项的布局为单独的块 */
+/* 确保每个菜单项的布局为独立的块 */
 .b-nav-item-dropdown .dropdown-item {
-  margin: 0 !important;
+  margin: 0 !important; /* 移除间距 */
+  padding: 10px 20px; /* 调整内边距 */
+  text-align: left;
 }
 
 /* 导航栏项目间的间距 */
 .b-nav-item {
-  margin-right: 20px;
+  margin-right: 50px;
 }
 
-/* 确保导航栏背景色 */
+/* 导航栏背景色 */
 .b-navbar {
   background-color: #007bff !important;
+  border-bottom: 2px solid #0056b3; /* 添加底部边框，增强视觉效果 */
 }
 
-/* 调整导航项的文字颜色 */
+/* 调整导航项文字颜色 */
 .b-nav-item a {
   color: white !important;
+  padding: 15px 20px; /* 增加内边距，使导航项看起来更舒展 */
+  text-decoration: none; /* 移除下划线 */
 }
 
-/* 悬停时的文字颜色 */
+/* 悬停时导航项的文字颜色 */
 .b-nav-item a:hover {
-  color: #ffc107 !important;
+  color: #ffc107 !important; /* 悬停时变为金黄色 */
 }
+
+/* 在导航栏中间添加间隔，确保项目布局更加均匀 */
+.b-navbar-nav {
+  display: flex;
+  justify-content: flex-start;
+}
+
 </style>
