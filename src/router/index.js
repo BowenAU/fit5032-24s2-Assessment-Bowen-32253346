@@ -5,17 +5,22 @@ import AdminPanelView from '@/views/AdminPanelView.vue'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
-import RatingView from '@/views/ReviewView.vue'
 import AboutView from '@/views/AboutView.vue'
-import TellView from '@/views/InformView.vue'
 import InformView from '@/views/InformView.vue'
 import ReviewView from '@/views/ReviewView.vue'
 import ServiceView from '@/views/ServiceView.vue'
 import FindUsView from '@/views/FindUsView.vue'
 
+// 你可以使用相对路径导入子服务视图
+import LanguageLearningView from '../views/services/LanguageLearningView.vue'
+import CareerResourcesView from '../views/services/CareerResourcesView.vue'
+import HealthInfoView from '../views/services/HealthInfoView.vue'
+import CulturalIntegrationView from '../views/services/CulturalIntegrationView.vue'
+
 const role = ref('')
 const username = ref('')
 const isAuthenticated = ref(false)
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -44,7 +49,7 @@ const router = createRouter({
       name: 'about',
       component: AboutView
     },
-        {
+    {
       path: '/inform',
       name: 'inform',
       component: InformView
@@ -52,26 +57,42 @@ const router = createRouter({
     {
       path: '/service',
       name: 'service',
-      component: ServiceView
+      component: ServiceView,
+      children: [
+        {
+          path: 'language-learning',
+          name: 'language-learning',
+          component: LanguageLearningView
+        },
+        {
+          path: 'career-resources',
+          name: 'career-resources',
+          component: CareerResourcesView
+        },
+        {
+          path: 'health-info',
+          name: 'health-info',
+          component: HealthInfoView
+        },
+        {
+          path: 'cultural-integration',
+          name: 'cultural-integration',
+          component: CulturalIntegrationView
+        }
+      ]
     },
     {
       path: '/findus',
       name: 'findus',
       component: FindUsView
     },
-        // {
-    //   path: '/',
-    //   name: '',
-    //   component: 
-    // },
     {
       path: '/admin',
       name: 'AdminPanel',
       component: AdminPanelView,
-      
     }
-    
   ]
 })
+
 export { role, username }
 export default router
