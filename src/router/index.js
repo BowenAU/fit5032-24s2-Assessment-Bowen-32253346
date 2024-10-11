@@ -5,9 +5,12 @@ import AdminPanelView from '@/views/AdminPanelView.vue'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
-import RatingView from '@/views/RatingView.vue'
+import RatingView from '@/views/ReviewView.vue'
 import AboutView from '@/views/AboutView.vue'
-import TellView from '@/views/TellView.vue'
+import TellView from '@/views/InformView.vue'
+import InformView from '@/views/InformView.vue'
+import ReviewView from '@/views/ReviewView.vue'
+import ServiceView from '@/views/ServiceView.vue'
 
 const role = ref('')
 const username = ref('')
@@ -31,9 +34,9 @@ const router = createRouter({
       component: SignUpView
     },
     {
-      path: '/rating',
-      name: 'Rating',
-      component: RatingView
+      path: '/review',
+      name: 'review',
+      component: ReviewView
     },
     {
       path: '/about',
@@ -41,9 +44,14 @@ const router = createRouter({
       component: AboutView
     },
         {
-      path: '/tell',
-      name: 'tell',
-      component: TellView
+      path: '/inform',
+      name: 'inform',
+      component: InformView
+    },
+    {
+      path: '/service',
+      name: 'service',
+      component: ServiceView
     },
     // {
     //   path: '/',

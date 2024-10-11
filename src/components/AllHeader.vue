@@ -2,6 +2,11 @@
     <div class="container">
       <header class="d-flex justify-content-center">
         <ul class="nav nav-pills">
+          <li class="nav-item">
+            <router-link to="/">
+              <div class="badge text-bg-primary text-wrap" style="width: 6rem">Home</div>
+            </router-link>
+          </li>
           <li class="nav-item" v-if="!isAuthenticated">
             <router-link to="/login">
               <div class="badge text-bg-primary text-wrap" style="width: 6rem">Log in</div>
@@ -13,9 +18,9 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/">
-              <div class="badge text-bg-primary text-wrap" style="width: 6rem">Home</div>
-            </router-link>
+            <router-link to="/service">
+              <div class="badge text-bg-primary text-wrap">Our Services</div>
+            </router-link>   
           </li>
           <li class="nav-item">
             <router-link to="/admin">
@@ -23,18 +28,18 @@
             </router-link>   
           </li>
           <li class="nav-item">
-            <router-link to="/rating">
-              <div class="badge text-bg-primary text-wrap" style="width: 6rem">Rating</div>
+            <router-link to="/review">
+              <div class="badge text-bg-primary text-wrap" style="width: 6rem">Review</div>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about">
-              <div class="badge text-bg-primary text-wrap">About</div>
+            <router-link to="/inform">
+              <div class="badge text-bg-primary text-wrap">Inform</div>
             </router-link>   
           </li>
           <li class="nav-item">
-            <router-link to="/tell">
-              <div class="badge text-bg-primary text-wrap">Tell</div>
+            <router-link to="/about">
+              <div class="badge text-bg-primary text-wrap">About us</div>
             </router-link>   
           </li>
         </ul>
