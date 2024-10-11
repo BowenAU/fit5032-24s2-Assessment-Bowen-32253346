@@ -3,7 +3,7 @@
     <carousel
       :items-to-show="1.5"
       :wrap-around="true"
-      :autoplay="5000"
+      :autoplay="2000"
       @mouseover="pauseAutoplay"
       @mouseleave="resumeAutoplay"
     >
