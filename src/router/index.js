@@ -6,7 +6,7 @@ import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import AboutView from '@/views/AboutView.vue'
-import InformView from '@/views/InformView.vue'
+import InformView from '@/views/EventsView.vue'
 import ReviewView from '@/views/ReviewView.vue'
 import ServiceView from '@/views/ServiceView.vue'
 
@@ -16,6 +16,7 @@ import HealthInfoView from '../views/services/HealthInfoView.vue'
 import CulturalIntegrationView from '../views/services/CulturalIntegrationView.vue'
 import ContactUsView from '@/views/ContactUsView.vue'
 import AskUsView from '@/views/AskUsView.vue'
+import EventsView from '@/views/EventsView.vue'
 
 const role = ref('')
 const username = ref('')
@@ -50,9 +51,9 @@ const router = createRouter({
       component: AboutView
     },
     {
-      path: '/inform',
-      name: 'inform',
-      component: InformView
+      path: '/events',
+      name: 'events',
+      component: EventsView
     },
     {
       path: '/service',

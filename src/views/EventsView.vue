@@ -1,5 +1,5 @@
 <template>
-  <h1>Inform</h1>
+  <h1>Events</h1>
 
   <div class="container text-center">
     <div class="row mb-3">

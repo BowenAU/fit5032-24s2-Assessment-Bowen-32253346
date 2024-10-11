@@ -29,7 +29,7 @@
 
           <b-nav-item to="/admin" tag="router-link">Admin Panel View Page</b-nav-item>
           <b-nav-item to="/review" tag="router-link">Review</b-nav-item>
-          <b-nav-item to="/inform" tag="router-link">Inform</b-nav-item>
+          <b-nav-item to="/events" tag="router-link">Events</b-nav-item>
           <b-nav-item to="/about" tag="router-link">About us</b-nav-item>
           <b-nav-item to="/askus" tag="router-link">Ask us</b-nav-item>
           <b-nav-item to="/findus" tag="router-link">Contact us</b-nav-item>
