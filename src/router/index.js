@@ -11,6 +11,7 @@ import TellView from '@/views/InformView.vue'
 import InformView from '@/views/InformView.vue'
 import ReviewView from '@/views/ReviewView.vue'
 import ServiceView from '@/views/ServiceView.vue'
+import FindUsView from '@/views/FindUsView.vue'
 
 const role = ref('')
 const username = ref('')
@@ -53,7 +54,12 @@ const router = createRouter({
       name: 'service',
       component: ServiceView
     },
-    // {
+    {
+      path: '/findus',
+      name: 'findus',
+      component: FindUsView
+    },
+        // {
     //   path: '/',
     //   name: '',
     //   component: 
