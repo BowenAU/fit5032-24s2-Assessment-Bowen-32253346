@@ -1,9 +1,7 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand to="/" tag="router-link">
-        MigrantCare
-      </b-navbar-brand>
+      <b-navbar-brand to="/" tag="router-link"> MigrantCare </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -15,16 +13,25 @@
 
           <!-- Our Services with Sub-navigation -->
           <b-nav-item-dropdown text="Our Services" right>
-            <router-link class="dropdown-item" to="/service/language-learning">Language Learning</router-link>
-            <router-link class="dropdown-item" to="/service/career-resources">Career Resources</router-link>
-            <router-link class="dropdown-item" to="/service/health-info">Health Information</router-link>
-            <router-link class="dropdown-item" to="/service/cultural-integration">Cultural Integration</router-link>
+            <router-link class="dropdown-item" to="/service/language-learning"
+              >Language Learning</router-link
+            >
+            <router-link class="dropdown-item" to="/service/career-resources"
+              >Career Resources</router-link
+            >
+            <router-link class="dropdown-item" to="/service/health-info"
+              >Health Information</router-link
+            >
+            <router-link class="dropdown-item" to="/service/cultural-integration"
+              >Cultural Integration</router-link
+            >
           </b-nav-item-dropdown>
 
           <b-nav-item to="/admin" tag="router-link">Admin Panel View Page</b-nav-item>
           <b-nav-item to="/review" tag="router-link">Review</b-nav-item>
           <b-nav-item to="/inform" tag="router-link">Inform</b-nav-item>
           <b-nav-item to="/about" tag="router-link">About us</b-nav-item>
+          <b-nav-item to="/askus" tag="router-link">Ask us</b-nav-item>
           <b-nav-item to="/findus" tag="router-link">Contact us</b-nav-item>
         </b-navbar-nav>
 
@@ -57,10 +64,10 @@
 export default {
   data() {
     return {
-      isAuthenticated: false, // 假设用户未登录
-    };
-  },
-};
+      isAuthenticated: false // 假设用户未登录
+    }
+  }
+}
 </script>
 
 <style scoped>

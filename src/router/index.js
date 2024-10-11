@@ -10,7 +10,6 @@ import InformView from '@/views/InformView.vue'
 import ReviewView from '@/views/ReviewView.vue'
 import ServiceView from '@/views/ServiceView.vue'
 
-
 import LanguageLearningView from '../views/services/LanguageLearningView.vue'
 import CareerResourcesView from '../views/services/CareerResourcesView.vue'
 import HealthInfoView from '../views/services/HealthInfoView.vue'
@@ -95,7 +94,7 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'AdminPanel',
-      component: AdminPanelView,
+      component: AdminPanelView
     }
   ]
 })

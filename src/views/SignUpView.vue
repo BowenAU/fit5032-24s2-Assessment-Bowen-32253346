@@ -1,8 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth"
-
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 
 const router = useRouter()
 
@@ -57,17 +56,18 @@ const submitForm = () => {
   //after the authentication is successful, the user information is stored in the localStorage
   const email = formData.value.email
   const pwd = formData.value.password
-  console.log(email, pwd);
+  console.log(email, pwd)
   //if it matches, the user is allowed to log in and jump to the home page
   //otherwise, a login failure message is displayed
-const auth = getAuth()
-createUserWithEmailAndPassword(auth, email, pwd)
-.then((data) => {
-  console.log("Firebase Register Successful!")
-  router.push('/about')
-}).catch((error) => {
-  console.log(error.code);
-})  
+  const auth = getAuth()
+  createUserWithEmailAndPassword(auth, email, pwd)
+    .then((data) => {
+      console.log('Firebase Register Successful!')
+      router.push('/about')
+    })
+    .catch((error) => {
+      console.log(error.code)
+    })
 }
 const errors = ref({
   email: null,

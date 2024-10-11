@@ -1,9 +1,9 @@
 <template>
   <div class="carousel-container">
-    <carousel 
-      :items-to-show="1.5" 
-      :wrap-around="true" 
-      :autoplay="5000"  
+    <carousel
+      :items-to-show="1.5"
+      :wrap-around="true"
+      :autoplay="5000"
       @mouseover="pauseAutoplay"
       @mouseleave="resumeAutoplay"
     >
@@ -40,15 +40,40 @@ export default {
     Carousel,
     Slide,
     Pagination,
-    Navigation,
+    Navigation
   },
   setup() {
     const slides = ref([
-      { id: 1, title: 'Australia Healthcare 1', description: 'This is an image of the Australian healthcare system 1', image: AustraliaHealthcare1 },
-      { id: 2, title: 'Australia Healthcare 2', description: 'This is an image of the Australian healthcare system 2', image: AustraliaHealthcare2 },
-      { id: 3, title: 'Australian and Chinese Flags', description: 'Flags of Australia and China', image: AustralianFlagAndChineseFlag },
-      { id: 4, title: 'Australian Nurse', description: 'An image showing an Australian nurse', image: AustraliaNurse },
-      { id: 5, title: 'Group Photo of Nurses', description: 'A group photo of nurses', image: GroupPhotoOfNurses }
+      {
+        id: 1,
+        title: 'Australia Healthcare 1',
+        description: 'This is an image of the Australian healthcare system 1',
+        image: AustraliaHealthcare1
+      },
+      {
+        id: 2,
+        title: 'Australia Healthcare 2',
+        description: 'This is an image of the Australian healthcare system 2',
+        image: AustraliaHealthcare2
+      },
+      {
+        id: 3,
+        title: 'Australian and Chinese Flags',
+        description: 'Flags of Australia and China',
+        image: AustralianFlagAndChineseFlag
+      },
+      {
+        id: 4,
+        title: 'Australian Nurse',
+        description: 'An image showing an Australian nurse',
+        image: AustraliaNurse
+      },
+      {
+        id: 5,
+        title: 'Group Photo of Nurses',
+        description: 'A group photo of nurses',
+        image: GroupPhotoOfNurses
+      }
     ])
 
     const isAutoplaying = ref(true)
@@ -96,4 +121,3 @@ p {
   font-size: 16px;
 }
 </style>
-

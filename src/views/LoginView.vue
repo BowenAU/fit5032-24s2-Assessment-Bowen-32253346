@@ -50,18 +50,18 @@ const submitForm = () => {
 
   const auth = getAuth()
   signInWithEmailAndPassword(getAuth(), email, pwd)
-  .then((data) => {
-    console.log("Firebase Register successful!")
-    router.push('/about')
-    console.log(auth.currentUser) //To check the current User signed in
-  }).catch((error) => {
-    console.log(error.code);
-
-  })
-  } ;
+    .then((data) => {
+      console.log('Firebase Register successful!')
+      router.push('/about')
+      console.log(auth.currentUser) //To check the current User signed in
+    })
+    .catch((error) => {
+      console.log(error.code)
+    })
+}
 const errors = ref({
   email: null,
-  password: null,
+  password: null
 })
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="contact-us">
     <h1>Contact Us</h1>
-    
+
     <!-- Contact Form Section -->
     <section class="contact-form-section">
       <h2>Get in Touch</h2>
@@ -18,7 +18,12 @@
 
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea v-model="form.message" id="message" placeholder="Your Message" required></textarea>
+          <textarea
+            v-model="form.message"
+            id="message"
+            placeholder="Your Message"
+            required
+          ></textarea>
         </div>
 
         <button type="submit" class="submit-button">Send Message</button>
@@ -36,7 +41,7 @@
     <!-- Map Section -->
     <section class="map-section">
       <h2>Our Location</h2>
-      
+
       <!-- Search Bar for Custom Start and End Locations -->
       <div class="search-bar">
         <input v-model="customStart" placeholder="Enter custom start location..." />
@@ -57,9 +62,9 @@
 </template>
 
 <script>
-import mapboxgl from 'mapbox-gl';
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import axios from 'axios';
+import mapboxgl from 'mapbox-gl'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
+import axios from 'axios'
 
 export default {
   name: 'ContactUs',
@@ -75,27 +80,27 @@ export default {
       customStart: '', // 用户自定义的开始位置
       customEnd: '', // 用户自定义的结束位置
       map: null,
-      marker: null,
-    };
+      marker: null
+    }
   },
   methods: {
     submitForm() {
-      alert(`Message sent! Name: ${this.form.name}, Email: ${this.form.email}`);
+      alert(`Message sent! Name: ${this.form.name}, Email: ${this.form.email}`)
     },
     // 获取用户当前位置并显示路线
     async getDirections() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async (position) => {
-          this.start = [position.coords.longitude, position.coords.latitude]; // 用户当前位置
+          this.start = [position.coords.longitude, position.coords.latitude] // 用户当前位置
 
-          const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${this.start};${this.end}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
-          const response = await axios.get(url);
-          const data = response.data.routes[0].geometry;
+          const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${this.start};${this.end}?geometries=geojson&access_token=${mapboxgl.accessToken}`
+          const response = await axios.get(url)
+          const data = response.data.routes[0].geometry
 
-          this.displayRoute(data);
-        });
+          this.displayRoute(data)
+        })
       } else {
-        alert('Geolocation is not supported by this browser.');
+        alert('Geolocation is not supported by this browser.')
       }
     },
     // 根据自定义的起点和终点显示路线
@@ -103,30 +108,30 @@ export default {
       const geocoderStart = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl
-      });
+      })
       const geocoderEnd = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl
-      });
+      })
 
       // 将用户输入的起点和终点转换为坐标
-      geocoderStart.query(this.customStart);
-      geocoderEnd.query(this.customEnd);
+      geocoderStart.query(this.customStart)
+      geocoderEnd.query(this.customEnd)
 
       geocoderStart.on('result', async (e) => {
-        const startCoordinates = e.result.center;
+        const startCoordinates = e.result.center
 
         geocoderEnd.on('result', async (f) => {
-          const endCoordinates = f.result.center;
+          const endCoordinates = f.result.center
 
           // 获取路线
-          const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${startCoordinates};${endCoordinates}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
-          const response = await axios.get(url);
-          const data = response.data.routes[0].geometry;
+          const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${startCoordinates};${endCoordinates}?geometries=geojson&access_token=${mapboxgl.accessToken}`
+          const response = await axios.get(url)
+          const data = response.data.routes[0].geometry
 
-          this.displayRoute(data);
-        });
-      });
+          this.displayRoute(data)
+        })
+      })
     },
     // 显示路线
     displayRoute(data) {
@@ -135,7 +140,7 @@ export default {
           type: 'Feature',
           properties: {},
           geometry: data
-        });
+        })
       } else {
         this.map.addLayer({
           id: 'route',
@@ -156,21 +161,25 @@ export default {
             'line-color': '#1db7dd',
             'line-width': 8
           }
-        });
+        })
       }
 
       // 自动调整地图视图以显示整个路线
-      const coordinates = data.coordinates;
-      const bounds = coordinates.reduce(function (bounds, coord) {
-        return bounds.extend(coord);
-      }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
+      const coordinates = data.coordinates
+      const bounds = coordinates.reduce(
+        function (bounds, coord) {
+          return bounds.extend(coord)
+        },
+        new mapboxgl.LngLatBounds(coordinates[0], coordinates[0])
+      )
 
-      this.map.fitBounds(bounds, { padding: 50 });
+      this.map.fitBounds(bounds, { padding: 50 })
     }
   },
   mounted() {
     // 使用提供的 Mapbox API token
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYm93ZW5mb3I1MDMyIiwiYSI6ImNtMjFsNjJwbDB0aWgycnB3aHMybXozZWYifQ.q911974r6pJP1Q-N4crdhA';
+    mapboxgl.accessToken =
+      'pk.eyJ1IjoiYm93ZW5mb3I1MDMyIiwiYSI6ImNtMjFsNjJwbDB0aWgycnB3aHMybXozZWYifQ.q911974r6pJP1Q-N4crdhA'
 
     // 初始化地图
     this.map = new mapboxgl.Map({
@@ -178,14 +187,12 @@ export default {
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [145.1346, -37.9119], // Monash 大学 Clayton 校区
       zoom: 12
-    });
+    })
 
     // 添加 Monash 大学的标记
-    new mapboxgl.Marker()
-      .setLngLat([145.1346, -37.9119])
-      .addTo(this.map);
+    new mapboxgl.Marker().setLngLat([145.1346, -37.9119]).addTo(this.map)
   }
-};
+}
 </script>
 
 <style scoped>
@@ -215,7 +222,8 @@ label {
   margin-bottom: 10px;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 10px;
   font-size: 1.1em;
