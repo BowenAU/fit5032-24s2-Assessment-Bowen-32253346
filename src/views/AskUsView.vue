@@ -13,47 +13,19 @@
         </li>
       </ul>
     </section>
-
     <!-- User Input Section -->
-    <div class="ask-input-section">
-      <h3>Ask Your Own Question</h3>
-      <textarea 
-        v-model="userQuestion" 
-        placeholder="Type your question here..." 
-        rows="4"
-      ></textarea>
-      <button @click="submitQuestion">Ask AI Assistant</button>
-    </div>
-
-    <!-- Chat Display Section -->
-    <div class="chat-section">
-      <div v-for="(chat, index) in chats" :key="index" class="chat-message">
-        <div class="user-message">
-          <strong>You:</strong> {{ chat.question }}
-        </div>
-        <div class="chatgpt-response">
-          <strong>ChatGPT:</strong> {{ chat.answer }}
-        </div>
-      </div>
-    </div>
-
-    <!-- Error message -->
-    <div v-if="errorMessage" class="error-message">
-      <p>{{ errorMessage }}</p>
-    </div>
+    <GeminiQA />
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
+import GeminiQA from "../components/GeminiQA.vue"
 export default {
-  name: 'AskUsView',
+  components: {
+    GeminiQA,
+  },
   data() {
     return {
-      userQuestion: '',  // 用户输入的问题
-      chats: [],         // 用于保存问题和 ChatGPT 回答
-      errorMessage: '',  // 错误信息提示
       faqs: [
         { question: 'What services does MigrantCare offer for newly arrived immigrants?', answer: 'MigrantCare offers a range of services such as healthcare information, language learning resources, career resources, and cultural integration programs.', show: false },
         { question: 'How can I access healthcare services as a new migrant?', answer: 'You can access healthcare services through our Health Information section, which provides details about local healthcare facilities and insurance options.', show: false },
@@ -65,54 +37,18 @@ export default {
         { question: 'How can I find local community centers?', answer: 'Our "Find Us" section lists local community centers and organizations where you can meet other migrants and access additional services.', show: false },
         { question: 'Can MigrantCare help with legal advice?', answer: 'While we do not provide direct legal services, we can refer you to trusted legal professionals who specialize in migrant law.', show: false },
         { question: 'How do I know if I’m eligible for government assistance programs?', answer: 'Visit our "Inform" section for guidance on eligibility requirements and how to apply for various government assistance programs.', show: false },
-      ]
+      ],
+      userQuestion: "",
+      chats: [],
+      errorMessage: "",
     };
   },
   methods: {
+    // 切换常见问题回答的显示和隐藏
     toggleAnswer(index) {
       this.faqs[index].show = !this.faqs[index].show;
     },
-    async submitQuestion() {
-      if (!this.userQuestion.trim()) {
-        this.errorMessage = "Please enter a valid question.";
-        return;
-      }
-
-      this.errorMessage = ""; // 清空错误信息
-
-      try {
-      //   const apiKey = process.env.VUE_APP_OPENAI_API_KEY;
-        const response = await axios.post(
-          'https://api.openai.com/v1/completions',
-          {
-            model: 'text-davinci-003',
-            prompt: this.userQuestion,
-            max_tokens: 150,
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`,
-            },
-          }
-        );
-
-        const answer = response.data.choices[0].text.trim();
-        
-        // 保存用户问题和 ChatGPT 回答
-        this.chats.push({
-          question: this.userQuestion,
-          answer: answer
-        });
-
-        // 清空用户输入
-        this.userQuestion = '';
-      } catch (error) {
-        this.errorMessage = 'Sorry, something went wrong while fetching the answer.';
-        console.error('Error:', error);
-      }
-    }
-  }
+  },
 };
 </script>
 
