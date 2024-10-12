@@ -3,7 +3,7 @@
     <carousel
       :items-to-show="1.5"
       :wrap-around="true"
-      :autoplay="2000"
+      :autoplay="3000"
       @mouseover="pauseAutoplay"
       @mouseleave="resumeAutoplay"
     >
@@ -46,32 +46,32 @@ export default {
     const slides = ref([
       {
         id: 1,
-        title: 'Australia Healthcare 1',
-        description: 'This is an image of the Australian healthcare system 1',
+        title: 'A Symbol of Care and Service',
+        description: 'The image shows a doctor holding a stethoscope with the Australian flag in the background, symbolizing the care and professionalism of Australia\'s healthcare system.',
         image: AustraliaHealthcare1
       },
       {
         id: 2,
-        title: 'Australia Healthcare 2',
-        description: 'This is an image of the Australian healthcare system 2',
+        title: 'Australia\'s Healthcare Commitment',
+        description: 'The image displays a healthcare professional’s uniform with a stethoscope and an Australia-shaped badge featuring the Australian flag.',
         image: AustraliaHealthcare2
       },
       {
         id: 3,
-        title: 'Australian and Chinese Flags',
-        description: 'Flags of Australia and China',
+        title: 'Australia and China: Bridging Communities',
+        description: 'This image showcases the flags of Australia and China side by side, symbolizing the close ties between the two nations.',
         image: AustralianFlagAndChineseFlag
       },
       {
         id: 4,
-        title: 'Australian Nurse',
-        description: 'An image showing an Australian nurse',
+        title: 'United for Healthcare: Australia\'s Medical Team',
+        description: 'This image illustrates a diverse group of healthcare professionals in Australia, standing together in front of the national flag.',
         image: AustraliaNurse
       },
       {
         id: 5,
-        title: 'Group Photo of Nurses',
-        description: 'A group photo of nurses',
+        title: 'Healthcare Heroes: A Diverse Medical Team',
+        description: 'This image depicts a group of young, diverse healthcare professionals in Australia, symbolizing the next generation of caregivers.',
         image: GroupPhotoOfNurses
       }
     ])
@@ -99,25 +99,41 @@ export default {
 <style scoped>
 .carousel-container {
   width: 80%;
-  margin: 0 auto;
+  margin: 80px auto; /* 保持与导航栏的距离 */
+  padding: 20px; /* 为整个轮播区域添加填充 */
 }
 
 .slide-content {
   text-align: center;
+  padding: 10px; /* 添加内容间距 */
 }
 
 .slide-image {
   width: 100%;
-  height: auto;
-  border-radius: 10px;
+  height: 350px; /* 统一图片高度 */
+  object-fit: cover; /* 确保图片按比例填充容器 */
+  border-radius: 10px; /* 保持圆角 */
 }
 
 h3 {
-  margin: 10px 0;
-  font-size: 24px;
+  margin: 15px 0 5px; /* 保持标题和内容间的适当距离 */
+  font-size: 22px;
+  font-weight: bold;
 }
 
 p {
-  font-size: 16px;
+  font-size: 14px; /* 调整描述字体大小 */
+  line-height: 1.6; /* 增加行间距以提高可读性 */
+  margin: 0 15px; /* 增加文字的左右内边距 */
+}
+
+.carousel .carousel__slide {
+  padding: 0 20px; /* 增加轮播间的左右间距 */
+}
+
+.carousel__pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
 }
 </style>

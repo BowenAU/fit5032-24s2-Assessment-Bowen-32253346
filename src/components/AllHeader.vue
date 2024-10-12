@@ -42,11 +42,6 @@
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
           </b-nav-form>
 
-          <b-nav-item-dropdown text="Language" right>
-            <b-dropdown-item>English</b-dropdown-item>
-            <b-dropdown-item>Chinese</b-dropdown-item>
-          </b-nav-item-dropdown>
-
           <b-nav-item-dropdown right>
             <template #button-content>
               <em>User</em>
