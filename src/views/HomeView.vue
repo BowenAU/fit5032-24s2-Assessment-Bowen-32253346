@@ -47,31 +47,36 @@ export default {
       {
         id: 1,
         title: 'A Symbol of Care and Service',
-        description: 'The image shows a doctor holding a stethoscope with the Australian flag in the background, symbolizing the care and professionalism of Australia\'s healthcare system.',
+        description:
+          "The image shows a doctor holding a stethoscope with the Australian flag in the background, symbolizing the care and professionalism of Australia's healthcare system.",
         image: AustraliaHealthcare1
       },
       {
         id: 2,
-        title: 'Australia\'s Healthcare Commitment',
-        description: 'The image displays a healthcare professional’s uniform with a stethoscope and an Australia-shaped badge featuring the Australian flag.',
+        title: "Australia's Healthcare Commitment",
+        description:
+          'The image displays a healthcare professional’s uniform with a stethoscope and an Australia-shaped badge featuring the Australian flag.',
         image: AustraliaHealthcare2
       },
       {
         id: 3,
         title: 'Australia and China: Bridging Communities',
-        description: 'This image showcases the flags of Australia and China side by side, symbolizing the close ties between the two nations.',
+        description:
+          'This image showcases the flags of Australia and China side by side, symbolizing the close ties between the two nations.',
         image: AustralianFlagAndChineseFlag
       },
       {
         id: 4,
-        title: 'United for Healthcare: Australia\'s Medical Team',
-        description: 'This image illustrates a diverse group of healthcare professionals in Australia, standing together in front of the national flag.',
+        title: "United for Healthcare: Australia's Medical Team",
+        description:
+          'This image illustrates a diverse group of healthcare professionals in Australia, standing together in front of the national flag.',
         image: AustraliaNurse
       },
       {
         id: 5,
         title: 'Healthcare Heroes: A Diverse Medical Team',
-        description: 'This image depicts a group of young, diverse healthcare professionals in Australia, symbolizing the next generation of caregivers.',
+        description:
+          'This image depicts a group of young, diverse healthcare professionals in Australia, symbolizing the next generation of caregivers.',
         image: GroupPhotoOfNurses
       }
     ])

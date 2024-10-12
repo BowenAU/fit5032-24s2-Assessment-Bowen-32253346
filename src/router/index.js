@@ -101,5 +101,3 @@ const router = createRouter({
 
 export { role, username }
 export default router
-
-

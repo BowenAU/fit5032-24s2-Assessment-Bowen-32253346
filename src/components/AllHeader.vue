@@ -3,7 +3,11 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="navbar-left">
       <div class="navbar-brand">
-        <img src="@/assets/MedicalEmergencySymbol.png" alt="Medical Emergency Symbol" class="navbar-logo" />
+        <img
+          src="@/assets/MedicalEmergencySymbol.png"
+          alt="Medical Emergency Symbol"
+          class="navbar-logo"
+        />
         <router-link to="/">MigrantCare</router-link>
       </div>
     </div>
@@ -14,12 +18,16 @@
 
       <!-- 修复 "Our Services" 的样式 -->
       <li class="dropdown">
-        <button aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Our Services</button>
+        <button aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
+          Our Services
+        </button>
         <ul class="dropdown-menu">
           <li><router-link to="/service/language-learning">Language Learning</router-link></li>
           <li><router-link to="/service/career-resources">Career Resources</router-link></li>
           <li><router-link to="/service/health-info">Health Information</router-link></li>
-          <li><router-link to="/service/cultural-integration">Cultural Integration</router-link></li>
+          <li>
+            <router-link to="/service/cultural-integration">Cultural Integration</router-link>
+          </li>
         </ul>
       </li>
 
@@ -49,15 +57,15 @@ export default {
   data() {
     return {
       isAuthenticated: false, // 假设用户未登录
-      searchQuery: ""
-    };
+      searchQuery: ''
+    }
   },
   methods: {
     performSearch() {
-      console.log("Search for:", this.searchQuery);
+      console.log('Search for:', this.searchQuery)
     }
   }
-};
+}
 </script>
 
 <style scoped>

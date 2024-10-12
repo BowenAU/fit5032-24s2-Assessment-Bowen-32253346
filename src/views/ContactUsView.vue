@@ -18,7 +18,12 @@
 
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea v-model="form.message" id="message" placeholder="Your Message" required></textarea>
+          <textarea
+            v-model="form.message"
+            id="message"
+            placeholder="Your Message"
+            required
+          ></textarea>
         </div>
 
         <button type="submit" class="submit-button">Send Message</button>
@@ -29,9 +34,9 @@
     <section class="contact-info-section">
       <h2>Our Contact Information</h2>
       <p><strong>Email:</strong> bowen@migrantcare.org</p>
-          <p><strong>Phone:</strong> (61) 0431 666 861</p>
-          <p><strong>Address:</strong> Wellington Rd, Clayton VIC 3168</p> 
-          <p><strong>Opening hours:</strong> Monday to Friday 8am - 12am</p> 
+      <p><strong>Phone:</strong> (61) 0431 666 861</p>
+      <p><strong>Address:</strong> Wellington Rd, Clayton VIC 3168</p>
+      <p><strong>Opening hours:</strong> Monday to Friday 8am - 12am</p>
     </section>
 
     <!-- Map Section -->
@@ -100,8 +105,12 @@ export default {
     },
     // 根据自定义的起点和终点显示路线
     async getCustomDirections() {
-      const startPoint = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${this.customStart}.json?access_token=${mapboxgl.accessToken}`)
-      const endPoint = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${this.customEnd}.json?access_token=${mapboxgl.accessToken}`)
+      const startPoint = await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.customStart}.json?access_token=${mapboxgl.accessToken}`
+      )
+      const endPoint = await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.customEnd}.json?access_token=${mapboxgl.accessToken}`
+      )
 
       const startCoordiantes = startPoint.data.features[0].center
       const endCoordiantes = endPoint.data.features[0].center

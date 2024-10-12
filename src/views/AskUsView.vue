@@ -7,7 +7,13 @@
     <section class="faq-section">
       <h2>Frequently Asked Questions</h2>
       <ul>
-        <li v-for="(faq, index) in faqs" :key="index" @click="toggleAnswer(index)" tabindex="0" @keypress.enter="toggleAnswer(index)">
+        <li
+          v-for="(faq, index) in faqs"
+          :key="index"
+          @click="toggleAnswer(index)"
+          tabindex="0"
+          @keypress.enter="toggleAnswer(index)"
+        >
           <strong>{{ faq.question }}</strong>
           <p v-if="faq.show">{{ faq.answer }}</p>
         </li>
@@ -19,37 +25,87 @@
 </template>
 
 <script>
-import GeminiQA from "../components/GeminiQA.vue"
+import GeminiQA from '../components/GeminiQA.vue'
 export default {
   components: {
-    GeminiQA,
+    GeminiQA
   },
   data() {
     return {
       faqs: [
-        { question: 'What services does MigrantCare offer for newly arrived immigrants?', answer: 'MigrantCare offers a range of services such as healthcare information, language learning resources, career resources, and cultural integration programs.', show: false },
-        { question: 'How can I access healthcare services as a new migrant?', answer: 'You can access healthcare services through our Health Information section, which provides details about local healthcare facilities and insurance options.', show: false },
-        { question: 'Where can I find language learning resources?', answer: 'You can find language learning resources under the "Language Learning" section of our website. We offer guides and links to online language courses and local language schools.', show: false },
-        { question: 'What cultural integration programs are available?', answer: 'Our cultural integration programs offer workshops, community events, and counseling services to help you better integrate into your new environment.', show: false },
-        { question: 'How can I search for a job as a migrant?', answer: 'Our Career Resources section provides tools for job searching, tips for building resumes, and information on industries that are actively hiring.', show: false },
-        { question: 'Are there any mentorship programs for new migrants?', answer: 'Yes, we offer mentorship programs where experienced migrants can help guide you through your first steps in a new country.', show: false },
-        { question: 'How do I get in contact with MigrantCare for specific inquiries?', answer: 'You can use our "Contact Us" page to reach out to us directly for any specific questions or concerns you may have.', show: false },
-        { question: 'How can I find local community centers?', answer: 'Our "Find Us" section lists local community centers and organizations where you can meet other migrants and access additional services.', show: false },
-        { question: 'Can MigrantCare help with legal advice?', answer: 'While we do not provide direct legal services, we can refer you to trusted legal professionals who specialize in migrant law.', show: false },
-        { question: 'How do I know if I’m eligible for government assistance programs?', answer: 'Visit our "Inform" section for guidance on eligibility requirements and how to apply for various government assistance programs.', show: false },
+        {
+          question: 'What services does MigrantCare offer for newly arrived immigrants?',
+          answer:
+            'MigrantCare offers a range of services such as healthcare information, language learning resources, career resources, and cultural integration programs.',
+          show: false
+        },
+        {
+          question: 'How can I access healthcare services as a new migrant?',
+          answer:
+            'You can access healthcare services through our Health Information section, which provides details about local healthcare facilities and insurance options.',
+          show: false
+        },
+        {
+          question: 'Where can I find language learning resources?',
+          answer:
+            'You can find language learning resources under the "Language Learning" section of our website. We offer guides and links to online language courses and local language schools.',
+          show: false
+        },
+        {
+          question: 'What cultural integration programs are available?',
+          answer:
+            'Our cultural integration programs offer workshops, community events, and counseling services to help you better integrate into your new environment.',
+          show: false
+        },
+        {
+          question: 'How can I search for a job as a migrant?',
+          answer:
+            'Our Career Resources section provides tools for job searching, tips for building resumes, and information on industries that are actively hiring.',
+          show: false
+        },
+        {
+          question: 'Are there any mentorship programs for new migrants?',
+          answer:
+            'Yes, we offer mentorship programs where experienced migrants can help guide you through your first steps in a new country.',
+          show: false
+        },
+        {
+          question: 'How do I get in contact with MigrantCare for specific inquiries?',
+          answer:
+            'You can use our "Contact Us" page to reach out to us directly for any specific questions or concerns you may have.',
+          show: false
+        },
+        {
+          question: 'How can I find local community centers?',
+          answer:
+            'Our "Find Us" section lists local community centers and organizations where you can meet other migrants and access additional services.',
+          show: false
+        },
+        {
+          question: 'Can MigrantCare help with legal advice?',
+          answer:
+            'While we do not provide direct legal services, we can refer you to trusted legal professionals who specialize in migrant law.',
+          show: false
+        },
+        {
+          question: 'How do I know if I’m eligible for government assistance programs?',
+          answer:
+            'Visit our "Inform" section for guidance on eligibility requirements and how to apply for various government assistance programs.',
+          show: false
+        }
       ],
-      userQuestion: "",
+      userQuestion: '',
       chats: [],
-      errorMessage: "",
-    };
+      errorMessage: ''
+    }
   },
   methods: {
     // 切换常见问题回答的显示和隐藏
     toggleAnswer(index) {
-      this.faqs[index].show = !this.faqs[index].show;
-    },
-  },
-};
+      this.faqs[index].show = !this.faqs[index].show
+    }
+  }
+}
 </script>
 
 <style scoped>
