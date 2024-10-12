@@ -1,23 +1,37 @@
 <script setup>
-import { role } from '../router/index'
 import { ref } from 'vue'
 import Rating from 'primevue/rating'
 
-// separate rating values are created for each news and course
+// Google search link generator
+const generateGoogleSearchLink = (query) => {
+  const baseUrl = 'https://www.google.com/search?q=';
+  return `${baseUrl}${encodeURIComponent(query)}`;
+}
+
+// Health news and recommended courses (without images)
 const healthNews = ref([
   {
     title: 'How to Access Healthcare Services in Australia',
-    link: '/health-services',
     rating: ref(null)
   },
   {
     title: 'Overcoming Language Barriers in the Health Industry for Chinese Immigrants',
-    link: '/language-barriers',
     rating: ref(null)
   },
   {
     title: 'Latest Job Opportunities in the Health Industry',
-    link: '/job-opportunities',
+    rating: ref(null)
+  },
+  {
+    title: 'Navigating Australia’s Health Insurance System',
+    rating: ref(null)
+  },
+  {
+    title: 'The Importance of Mental Health Support for Migrants',
+    rating: ref(null)
+  },
+  {
+    title: 'How Migrant Communities Contribute to Australia’s Healthcare Workforce',
     rating: ref(null)
   }
 ])
@@ -26,125 +40,146 @@ const recommendedCourses = ref([
   {
     name: 'Basic Medical English',
     description: 'Learn basic medical terminology and conversation skills',
-    link: '/courses/medical-english',
     rating: ref(null)
   },
   {
     name: 'Introduction to Australia’s Health Industry',
     description: 'Understand the Australian healthcare system and industry trends',
-    link: '/courses/health-industry-intro',
+    rating: ref(null)
+  },
+  {
+    name: 'First Aid Training for Non-Native Speakers',
+    description: 'Gain the skills to provide first aid and understand emergency procedures',
+    rating: ref(null)
+  },
+  {
+    name: 'Medical Ethics and Laws in Australia',
+    description: 'Explore the legal and ethical standards in Australian healthcare',
+    rating: ref(null)
+  },
+  {
+    name: 'Health Literacy for Immigrants',
+    description: 'Enhance your understanding of health information and services',
     rating: ref(null)
   }
 ])
 </script>
 
 <template>
-  <main class="container">
-    <!-- Welcome message -->
-    <section class="welcome-section">
-      <p>Your current role is: {{ role }}</p>
-    </section>
-
-    <!-- Health News -->
-    <div class="container text-center">
-      <div class="row">
-        <div class="col-md-6">
-          <section class="news-section">
-            <h2>Latest Health-Related News</h2>
-            <ul>
-              <li v-for="news in healthNews" :key="news.title">
-                <div class="container text-center">
-                  <div class="row align-items-center">
-                    <div class="col-6">
-                      <a :href="news.link">{{ news.title }}</a>
-                    </div>
-                    <div class="col-6">
-                      <Rating v-model="news.rating" />
-                      The rate is {{ value }}
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </section>
-        </div>
-
-        <!-- Recommended Courses -->
-        <div class="col-md-6">
-          <section class="courses-section">
-            <h2>Recommended Courses</h2>
-            <ul>
-              <li v-for="course in recommendedCourses" :key="course.name">
-                <div class="container text-center">
-                  <div class="row align-items-center">
-                    <div class="col-6">
-                      <a :href="course.link">
-                        <p>{{ course.name }}</p>
-                        <p>{{ course.description }}</p>
-                      </a>
-                    </div>
-                    <div class="col-6">
-                      <Rating v-model="course.rating" />
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </section>
+  <main class="content-container">
+    <!-- Health News Section -->
+    <section class="card-section">
+      <h2>Latest Health-Related News</h2>
+      <div class="card-grid">
+        <div class="card" v-for="news in healthNews" :key="news.title">
+          <div class="card-content">
+            <a :href="generateGoogleSearchLink(news.title)" target="_blank" rel="noopener noreferrer">
+              <h3>{{ news.title }}</h3>
+            </a>
+            <Rating v-model="news.rating" aria-label="Rate this news" class="rating-stars" />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Recommended Courses Section -->
+    <section class="card-section">
+      <h2>Recommended Courses</h2>
+      <div class="card-grid">
+        <div class="card" v-for="course in recommendedCourses" :key="course.name">
+          <div class="card-content">
+            <a :href="generateGoogleSearchLink(course.name)" target="_blank" rel="noopener noreferrer">
+              <h3>{{ course.name }}</h3>
+              <p>{{ course.description }}</p>
+            </a>
+            <Rating v-model="course.rating" aria-label="Rate this course" class="rating-stars" />
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
 
 <style scoped>
-.container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+/* General Layout */
+.content-container {
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
 }
 
-.welcome-section {
+/* Card Sections */
+.card-section {
+  margin-bottom: 40px;
+}
+
+.card-section h2 {
+  text-align: center;
+  color: #007bff;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+}
+
+/* Cards Grid Layout */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 280px;
   margin-bottom: 20px;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.news-section,
-.courses-section {
-  margin-bottom: 20px;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.news-section h2,
-.courses-section h2 {
+/* Card Content */
+.card-content h3 {
+  font-size: 1.5em;
+  color: #333;
   margin-bottom: 10px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.card-content p {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 15px;
 }
 
-li {
-  margin-bottom: 10px;
-}
-
-a {
+.card-content a {
   text-decoration: none;
-  color: #1e90ff;
+  color: #007bff;
 }
 
-a:hover {
+.card-content a:hover {
   text-decoration: underline;
 }
 
-/* text and rating component are centered vertically */
-.row.align-items-center {
-  display: flex;
-  align-items: center;
+/* Rating Stars */
+.rating-stars {
+  margin-top: 15px;
+  justify-content: center;
 }
 
-.col-6 {
-  display: flex;
-  align-items: center;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+  }
 }
 </style>
