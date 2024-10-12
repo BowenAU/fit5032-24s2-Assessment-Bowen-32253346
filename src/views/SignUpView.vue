@@ -4,14 +4,19 @@ import { useRouter } from 'vue-router'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
 import db from "../firebase/init"
+import Select from 'primevue/select';
+
 
 const router = useRouter()
 
 const formData = ref({
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
+  role: ''
 })
+
+const roles = ref(['admin', 'user', 'volunteer']);
 const validateEmail = (blur) => {
   if (formData.value.email.length < 10) {
     if (blur) errors.value.email = 'Please input right Email'
@@ -19,7 +24,13 @@ const validateEmail = (blur) => {
     errors.value.email = null
   }
 }
-
+const validateRole = (blur) => {
+  if (formData.value.role === '') {
+    if (blur) errors.value.role = 'Please select a role'
+  } else {
+    errors.value.role = null
+  }
+}
 const validatePassword = (blur) => {
   const password = formData.value.password
   const minLength = 8
@@ -54,9 +65,11 @@ const submitForm = async () => {
   validateEmail(true)
   //validate the password is valid
   validatePassword(true)
+  validateRole(true)
   //after the authentication is successful, the user information is stored in the localStorage
   const email = formData.value.email
   const pwd = formData.value.password
+  const userRole = formData.value.role
   console.log(email, pwd)
   //if it matches, the user is allowed to log in and jump to the home page
   //otherwise, a login failure message is displayed
@@ -64,7 +77,7 @@ const submitForm = async () => {
   const { user } = await createUserWithEmailAndPassword(auth, email, pwd)
   const userEmail = user.email;
   const userID = user.uid;
-  const role = "user";
+  const role = userRole;
 
   try {
     await setDoc(doc(db, "users", userID), {
@@ -79,14 +92,16 @@ const submitForm = async () => {
 const errors = ref({
   email: null,
   password: null,
-  confirmPassword: null
+  confirmPassword: null,
+  role: null,
 })
 
 const clearForm = () => {
   formData.value = {
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    role: ''
   }
 }
 </script>
@@ -122,6 +137,15 @@ const clearForm = () => {
                 @blur="() => validateConfirmPassword(true)" />
               <div v-if="errors.confirmPassword" class="text-danger">
                 {{ errors.confirmPassword }}
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="text-center">
+              <Select v-model="formData.role" :options="roles" placeholder="Select a Role" class="w-full md:w-56"
+                @blur="() => validateRole(true)" />
+              <div v-if="errors.role" class="text-danger">
+                {{ errors.role }}
               </div>
             </div>
           </div>
