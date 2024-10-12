@@ -82,8 +82,8 @@ const router = createRouter({
       ]
     },
     {
-      path: '/findus',
-      name: 'findus',
+      path: '/contactus',
+      name: 'contactus',
       component: ContactUsView
     },
     {

@@ -21,8 +21,10 @@
         </div>
         <div class="footer-section">
           <h5>Get in Touch</h5>
-          <p>Email: Bowen@migrantcare.org</p>
-          <p>Phone: +61 0431 666 861</p>
+          <p><strong>Email:</strong> bowen@migrantcare.org</p>
+          <p><strong>Phone:</strong> (61) 0431 666 861</p>
+          <p><strong>Address:</strong> Wellington Rd, Clayton VIC 3168</p> 
+            <p><strong>Opening hours:</strong> Monday to Friday 8am - 12am</p> 
         </div>
       </div>
       <div class="footer-bottom">
@@ -42,6 +44,7 @@
     background-color: #007bff;
     padding: 20px;
     color: white;
+    margin-top: 40px; /* 增加顶部外边距，确保与内容有足够的空间 */
   }
   
   .footer-content {
@@ -83,6 +86,7 @@
     margin-top: 20px;
     border-top: 1px solid white;
     padding-top: 10px;
-  } 
+    font-size: 14px; /* 提高文字的可读性 */
+  }
   </style>
   
