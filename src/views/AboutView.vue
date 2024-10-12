@@ -19,7 +19,7 @@
     </div>
 
     <div class="about-team">
-      <h2>Our Team</h2>
+      <h2 class="team-title">Our Team</h2>
       <div class="team-member" v-for="member in team" :key="member.id">
         <img :src="getImagePath(member.image)" :alt="member.name" class="member-photo" />
         <div class="member-info">
@@ -79,6 +79,7 @@ export default {
   background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
 }
 
+/* About header section styling */
 .about-header {
   text-align: center;
   margin-bottom: 50px;
@@ -96,6 +97,7 @@ export default {
   max-width: 700px;
 }
 
+/* Our Vision section styling */
 .about-vision {
   text-align: center;
   margin: 60px 0;
@@ -113,11 +115,20 @@ export default {
   max-width: 650px;
 }
 
+/* Our Team section styling */
 .about-team {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin: 50px 0;
+}
+
+.team-title {
+  text-align: center;
+  width: 100%;
+  font-size: 2.5em;
+  color: #00796b;
+  margin-bottom: 40px;
 }
 
 .team-member {
@@ -146,6 +157,7 @@ export default {
   line-height: 1.5;
 }
 
+/* Responsive design for mobile */
 @media (max-width: 768px) {
   .about-header h1 {
     font-size: 2.8em;
