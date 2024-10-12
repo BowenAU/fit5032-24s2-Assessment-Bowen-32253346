@@ -8,6 +8,7 @@ import SignUpView from '@/views/SignUpView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ReviewView from '@/views/ReviewView.vue'
 import ServiceView from '@/views/ServiceView.vue'
+import GetAllUserAPI from '../views/GetAllUserAPI.vue'
 
 import LanguageLearningView from '../views/services/LanguageLearningView.vue'
 import CareerResourcesView from '../views/services/CareerResourcesView.vue'
@@ -55,31 +56,29 @@ const router = createRouter({
       component: EventsView
     },
     {
+      path: '/service/language-learning',
+      name: 'LL',
+      component: LanguageLearningView
+    },
+    {
+      path: '/service/career-resources',
+      name: 'CR',
+      component: CareerResourcesView
+    },
+    {
+      path: '/service/health-info',
+      name: 'HI',
+      component: HealthInfoView
+    },
+    {
+      path: '/service/cultural-integration',
+      name: 'CI',
+      component: CulturalIntegrationView
+    },
+    {
       path: '/service',
       name: 'service',
-      component: ServiceView,
-      children: [
-        {
-          path: 'language-learning',
-          name: 'language-learning',
-          component: LanguageLearningView
-        },
-        {
-          path: 'career-resources',
-          name: 'career-resources',
-          component: CareerResourcesView
-        },
-        {
-          path: 'health-info',
-          name: 'health-info',
-          component: HealthInfoView
-        },
-        {
-          path: 'cultural-integration',
-          name: 'cultural-integration',
-          component: CulturalIntegrationView
-        }
-      ]
+      component: ServiceView
     },
     {
       path: '/contactus',
@@ -95,9 +94,14 @@ const router = createRouter({
       path: '/admin',
       name: 'AdminPanel',
       component: AdminPanelView
+    },
+    {
+      path: '/getAllUsersAPI',
+      name: 'getallusers',
+      component: GetAllUserAPI
     }
   ]
 })
 
-export { role, username }
+export { role, isAuthenticated }
 export default router

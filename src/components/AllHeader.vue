@@ -13,13 +13,12 @@
     </div>
     <ul class="navbar-menu">
       <li><router-link to="/">Home</router-link></li>
-      <li v-if="!isAuthenticated"><router-link to="/login">Log in</router-link></li>
-      <li v-if="!isAuthenticated"><router-link to="/signup">Sign Up</router-link></li>
+      <li v-if="!isAuthenticated"></li>
 
       <!-- 修复 "Our Services" 的样式 -->
-      <li class="dropdown">
+      <li class="dropdown" v-if="isAuthenticated">
         <button aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-          Our Services
+          <router-link to="/service"> Our Services</router-link>
         </button>
         <ul class="dropdown-menu">
           <li><router-link to="/service/language-learning">Language Learning</router-link></li>
@@ -31,41 +30,40 @@
         </ul>
       </li>
 
-      <li><router-link to="/admin">Admin Panel View Page</router-link></li>
-      <li><router-link to="/review">Review</router-link></li>
-      <li><router-link to="/events">Events</router-link></li>
+      <li><router-link to="/admin" v-if="role === 'admin'">Admin Panel View Page</router-link></li>
+      <li><router-link to="/review" v-if="isAuthenticated">Review</router-link></li>
+      <li><router-link to="/events" v-if="isAuthenticated">Events</router-link></li>
       <li><router-link to="/about">About us</router-link></li>
       <li><router-link to="/askus">Ask us</router-link></li>
       <li><router-link to="/contactus">Contact us</router-link></li>
     </ul>
     <div class="navbar-right">
-      <input type="text" placeholder="Search" v-model="searchQuery" aria-label="Search" />
-      <button @click="performSearch">Search</button>
-      <div class="user-dropdown">
-        <button aria-haspopup="true" aria-expanded="false">User</button>
-        <ul class="user-dropdown-menu">
-          <li>Profile</li>
-          <li>Sign Out</li>
-        </ul>
+      <div v-if="!isAuthenticated" class="ml-3">
+        <router-link to="/login"><Button label="Log in" severity="secondary" raised /></router-link>
+      </div>
+      <div v-if="isAuthenticated">
+        <SplitButton :model="items" severity="secondary">Login as {{ role }}</SplitButton>
       </div>
     </div>
   </nav>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isAuthenticated: false, // 假设用户未登录
-      searchQuery: ''
-    }
-  },
-  methods: {
-    performSearch() {
-      console.log('Search for:', this.searchQuery)
+<script setup>
+import { useRouter } from 'vue-router'
+import { role, isAuthenticated } from '../router/index.js'
+import Button from 'primevue/button'
+import SplitButton from 'primevue/splitbutton'
+const router = useRouter()
+const items = [
+  {
+    label: 'Logout',
+    command: () => {
+      role.value = ''
+      isAuthenticated.value = false
+      router.push('/')
     }
   }
-}
+]
 </script>
 
 <style scoped>
@@ -122,8 +120,10 @@ export default {
   display: flex;
   margin: 0;
   padding: 0;
-  flex-grow: 1; /* 让菜单占据中间位置 */
-  justify-content: center; /* 确保导航菜单居中 */
+  flex-grow: 1;
+  /* 让菜单占据中间位置 */
+  justify-content: center;
+  /* 确保导航菜单居中 */
 }
 
 .navbar-menu li {
@@ -134,7 +134,6 @@ export default {
 .navbar-menu li a {
   color: white;
   text-decoration: none;
-  padding: 8px 12px;
 }
 
 .navbar-menu li a:focus {
@@ -157,7 +156,6 @@ export default {
   border: none;
   color: white;
   cursor: pointer;
-  padding: 8px 12px;
   font-size: 16px;
   line-height: 24px;
   text-align: center;
@@ -172,14 +170,14 @@ export default {
   list-style: none;
   padding: 0;
   margin: 0;
-  min-width: 180px;
   z-index: 1000;
 }
 
 .dropdown-menu li {
   padding: 10px 20px;
-  text-align: left;
   white-space: nowrap;
+  text-align: center;
+  /* Center-aligns the text */
 }
 
 .dropdown:hover .dropdown-menu {
@@ -203,6 +201,7 @@ export default {
 .navbar-right {
   display: flex;
   align-items: center;
+  color: white;
 }
 
 .navbar-right input {

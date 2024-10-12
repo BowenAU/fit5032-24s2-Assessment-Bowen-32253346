@@ -1,5 +1,5 @@
 <script setup>
-import { role, username } from '../router/index'
+import { role } from '../router/index'
 import { ref } from 'vue'
 import Rating from 'primevue/rating'
 
@@ -42,7 +42,6 @@ const recommendedCourses = ref([
   <main class="container">
     <!-- Welcome message -->
     <section class="welcome-section">
-      <h1>Welcome, {{ username }}!</h1>
       <p>Your current role is: {{ role }}</p>
     </section>
 

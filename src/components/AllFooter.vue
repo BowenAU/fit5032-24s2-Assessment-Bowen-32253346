@@ -46,7 +46,6 @@ export default {
   background-color: #007bff;
   padding: 20px;
   color: white;
-  margin-top: 40px; /* 增加顶部外边距，确保与内容有足够的空间 */
 }
 
 .footer-content {
@@ -88,6 +87,7 @@ export default {
   margin-top: 20px;
   border-top: 1px solid white;
   padding-top: 10px;
-  font-size: 14px; /* 提高文字的可读性 */
+  font-size: 14px;
+  /* 提高文字的可读性 */
 }
 </style>

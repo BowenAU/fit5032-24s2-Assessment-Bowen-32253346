@@ -2,6 +2,9 @@
 import { ref } from 'vue'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
+import { doc, getDoc } from 'firebase/firestore'
+import db from '../firebase/init'
+import { role, isAuthenticated } from '../router/index.js'
 
 const router = useRouter()
 
@@ -40,7 +43,7 @@ const validatePassword = (blur) => {
     errors.value.password = null
   }
 }
-const submitForm = () => {
+const submitForm = async () => {
   //validate the user name is valid
   validateEmail(true)
   //validate the password is valid
@@ -49,15 +52,17 @@ const submitForm = () => {
   const pwd = formData.value.password
 
   const auth = getAuth()
-  signInWithEmailAndPassword(getAuth(), email, pwd)
-    .then((data) => {
-      console.log('Firebase Register successful!')
-      router.push('/about')
-      console.log(auth.currentUser) //To check the current User signed in
-    })
-    .catch((error) => {
-      console.log(error.code)
-    })
+  const { user } = await signInWithEmailAndPassword(auth, email, pwd)
+  console.log(user.uid)
+  const userRef = await getDoc(doc(db, 'users', user.uid))
+  if (userRef.exists()) {
+    const userData = userRef.data()
+    isAuthenticated.value = true
+    role.value = userData.role
+    router.push('/about')
+  } else {
+    alert('Login failed')
+  }
 }
 const errors = ref({
   email: null,
@@ -102,6 +107,9 @@ const errors = ref({
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Login</button>
+          </div>
+          <div class="text-center mt-3">
+            Don't have an account? Click <router-link to="/signup">here</router-link> to sign up
           </div>
         </form>
       </div>

@@ -17,14 +17,13 @@
 import { ref } from 'vue'
 import Menubar from 'primevue/menubar' // 按需导入 Menubar 组件
 import TableSection from '../components/TableSection.vue' // 按需导入表格组件
-import ChartSection from '../components/ChartSection.vue' // 按需导入图表组件
 
 const items = [
   {
     label: 'Table',
     items: [
       {
-        label: 'User',
+        label: 'All User',
         command: () => {
           activeSection.value = 'table'
           activeRole.value = 'user'
@@ -34,25 +33,6 @@ const items = [
         label: 'Volunteer',
         command: () => {
           activeSection.value = 'table'
-          activeRole.value = 'volunteer'
-        }
-      }
-    ]
-  },
-  {
-    label: 'Chart',
-    items: [
-      {
-        label: 'User',
-        command: () => {
-          activeSection.value = 'chart'
-          activeRole.value = 'user'
-        }
-      },
-      {
-        label: 'Volunteer',
-        command: () => {
-          activeSection.value = 'chart'
           activeRole.value = 'volunteer'
         }
       }

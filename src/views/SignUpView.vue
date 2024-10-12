@@ -3,9 +3,9 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
-import db from "../firebase/init"
-import Select from 'primevue/select';
-
+import db from '../firebase/init'
+import Select from 'primevue/select'
+import { role as Role, isAuthenticated } from '../router/index.js'
 
 const router = useRouter()
 
@@ -16,7 +16,7 @@ const formData = ref({
   role: ''
 })
 
-const roles = ref(['admin', 'user', 'volunteer']);
+const roles = ref(['admin', 'user', 'volunteer'])
 const validateEmail = (blur) => {
   if (formData.value.email.length < 10) {
     if (blur) errors.value.email = 'Please input right Email'
@@ -75,15 +75,17 @@ const submitForm = async () => {
   //otherwise, a login failure message is displayed
   const auth = getAuth()
   const { user } = await createUserWithEmailAndPassword(auth, email, pwd)
-  const userEmail = user.email;
-  const userID = user.uid;
-  const role = userRole;
+  const userEmail = user.email
+  const userID = user.uid
+  const role = userRole
 
   try {
-    await setDoc(doc(db, "users", userID), {
+    await setDoc(doc(db, 'users', userID), {
       email: userEmail,
       role: role
     })
+    isAuthenticated.value = true
+    Role.value = role
     router.push('/about')
   } catch (error) {
     console.log(error)
@@ -93,7 +95,7 @@ const errors = ref({
   email: null,
   password: null,
   confirmPassword: null,
-  role: null,
+  role: null
 })
 
 const clearForm = () => {
@@ -111,30 +113,47 @@ const clearForm = () => {
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <h1 class="text-center">Sign Up</h1>
-        <p class="text-center">Make it Happen</p >
-        <p class="text-center">Join now</p >
+        <p class="text-center">Make it Happen</p>
+        <p class="text-center">Join now</p>
         <form @submit.prevent="submitForm">
           <div class="row mb-3">
             <div class="col-md-6 col-sm-6 offset-3">
               <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" @blur="() => validateEmail(true)"
-                @input="() => validateEmail(false)" v-model="formData.email" />
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                @blur="() => validateEmail(true)"
+                @input="() => validateEmail(false)"
+                v-model="formData.email"
+              />
               <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col-md-6 col-sm-6 offset-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" @blur="() => validatePassword(true)"
-                @input="() => validatePassword(false)" v-model="formData.password" />
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                @blur="() => validatePassword(true)"
+                @input="() => validatePassword(false)"
+                v-model="formData.password"
+              />
               <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
             </div>
           </div>
           <div class="row mb-3">
             <div class="col-md-6 col-sm-6 offset-3">
               <label for="confirm-password" class="form-label">Confirm password</label>
-              <input type="password" class="form-control" id="confirm-password" v-model="formData.confirmPassword"
-                @blur="() => validateConfirmPassword(true)" />
+              <input
+                type="password"
+                class="form-control"
+                id="confirm-password"
+                v-model="formData.confirmPassword"
+                @blur="() => validateConfirmPassword(true)"
+              />
               <div v-if="errors.confirmPassword" class="text-danger">
                 {{ errors.confirmPassword }}
               </div>
@@ -142,8 +161,13 @@ const clearForm = () => {
           </div>
           <div class="row mb-3">
             <div class="text-center">
-              <Select v-model="formData.role" :options="roles" placeholder="Select a Role" class="w-full md:w-56"
-                @blur="() => validateRole(true)" />
+              <Select
+                v-model="formData.role"
+                :options="roles"
+                placeholder="Select a Role"
+                class="w-full md:w-56"
+                @blur="() => validateRole(true)"
+              />
               <div v-if="errors.role" class="text-danger">
                 {{ errors.role }}
               </div>
@@ -151,6 +175,9 @@ const clearForm = () => {
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Sign up</button>
+          </div>
+          <div class="text-center mt-3">
+            Already have an account? Click <router-link to="/login">here</router-link> to login
           </div>
         </form>
       </div>

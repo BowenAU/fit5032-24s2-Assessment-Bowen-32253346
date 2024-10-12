@@ -10,53 +10,27 @@
       filterDisplay="row"
     >
       <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-      <!-- 搜索框：名字 -->
-      <Column field="name" header="Name" style="min-width: 12rem" :showFilterMenu="false" sortable>
+      <!-- ID 列，添加搜索框 -->
+      <Column field="id" header="ID" style="min-width: 12rem" sortable>
         <template #filter="{ filterModel, filterCallback }">
           <InputText
             v-model="filterModel.value"
-            type="text"
             @input="filterCallback()"
-            placeholder="Search by name"
+            placeholder="Search by ID"
           />
         </template>
       </Column>
-      <!-- 搜索框：性别 -->
-      <Column
-        field="gender"
-        header="Gender"
-        style="min-width: 10rem"
-        :showFilterMenu="false"
-        sortable
-      >
+      <!-- Email 列，添加搜索框 -->
+      <Column field="email" header="Email" style="min-width: 12rem" sortable>
         <template #filter="{ filterModel, filterCallback }">
           <InputText
             v-model="filterModel.value"
-            type="text"
             @input="filterCallback()"
-            placeholder="Search by gender"
+            placeholder="Search by Email"
           />
         </template>
       </Column>
-      <Column field="dob" header="DOB" style="min-width: 12rem" sortable></Column>
-      <Column field="email" header="Email" style="min-width: 12rem"></Column>
-      <!-- 评分 (仅 volunteer) -->
-      <Column
-        v-if="props.role === 'volunteer'"
-        field="rating"
-        header="Rating"
-        style="min-width: 8rem"
-        sortable
-      ></Column>
-      <Column header="Send Email" style="min-width: 10rem">
-        <template #body="{ data }">
-          <Button
-            label="Send Email"
-            @click="sendEmail(data)"
-            class="p-button-sm p-button-success"
-          />
-        </template>
-      </Column>
+      <Column field="role" header="Role" style="min-width: 12rem"></Column>
     </DataTable>
 
     <div class="mt-3">
@@ -72,7 +46,7 @@
 </template>
 
 <script setup>
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, onMounted, toRefs } from 'vue'
 import { FilterMatchMode } from '@primevue/core/api'
 import { saveAs } from 'file-saver'
 import DataTable from 'primevue/datatable'
@@ -85,61 +59,56 @@ import axios from 'axios'
 const props = defineProps({
   role: String
 })
+const { role } = toRefs(props)
 
 const data = ref([])
 const selectedData = ref([])
 const filters = ref({
-  name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  gender: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
+  id: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+  email: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
 })
-
-const sendEmail = async (user) => {
-  //console.log(user.email, user.name)
-  try {
-    const response = await axios.post('https://sendemail-jph42zefya-uc.a.run.app', {
-      email: user.email,
-      name: user.name
-    })
-    alert('Sent')
-  } catch (error) {
-    console.log('Error sending email', error)
-  }
-}
 
 const sendEmailsToSelected = () => {
   console.log(selectedData.value)
 }
 
-async function fetchData(functionUrl) {
+// 独立数据获取函数
+const fetchData = async (functionUrl) => {
   try {
     const response = await axios.get(functionUrl)
-    console.log(response.data)
     data.value = response.data
+    console.log(response)
   } catch (error) {
-    console.error('Error fetching data:', error)
+    console.error('获取数据时出错:', error)
   }
 }
-// 监视 role 变化来动态加载数据
+
+// 使用 `watch` 来监视 `role` 变化并获取数据
 watch(
-  () => props.role,
+  () => role.value,
   (newRole) => {
     if (newRole === 'user') {
-      fetchData('https://getusers-jph42zefya-uc.a.run.app')
+      fetchData('https://getusers-o2v7rvex2q-uc.a.run.app')
     } else if (newRole === 'volunteer') {
-      fetchData('https://getvolunteers-jph42zefya-uc.a.run.app')
+      fetchData('https://getvolunteers-o2v7rvex2q-uc.a.run.app')
     }
   },
   { immediate: true }
 )
 
+// 使用 `onMounted` 来调用数据获取函数
+onMounted(() => {
+  fetchData('https://getusers-o2v7rvex2q-uc.a.run.app')
+})
+
 // 过滤后的数据
 const filteredData = computed(() => {
-  const nameFilter = filters.value.name.value?.toLowerCase() || ''
-  const genderFilter = filters.value.gender.value?.toLowerCase() || ''
+  const idFilter = filters.value.id.value?.toLowerCase() || ''
+  const emailFilter = filters.value.email.value?.toLowerCase() || ''
   return data.value.filter(
     (item) =>
-      (!nameFilter || item.name.toLowerCase().startsWith(nameFilter)) &&
-      (!genderFilter || item.gender.toLowerCase().startsWith(genderFilter))
+      (!idFilter || item.id.toLowerCase().startsWith(idFilter)) &&
+      (!emailFilter || item.email.toLowerCase().startsWith(emailFilter))
   )
 })
 
@@ -147,25 +116,21 @@ const filteredData = computed(() => {
 function exportCSV() {
   const csvData = selectedData.value
     .map((row) =>
-      props.role === 'user'
-        ? `${row.name},${row.gender},${row.email}`
-        : `${row.name},${row.gender},${row.email},${row.rating}`
+      role.value === 'user'
+        ? `${row.id},${row.email},${row.role}`
+        : `${row.id},${row.email},${row.role},${row.rating}`
     )
     .join('\n')
 
   const blob = new Blob(
-    [
-      props.role === 'user'
-        ? `Name,Gender,Email\n${csvData}`
-        : `Name,Gender,Email,Rating\n${csvData}`
-    ],
+    [role.value === 'user' ? `ID,Email,Role\n${csvData}` : `ID,Email,Role,Rating\n${csvData}`],
     { type: 'text/csv;charset=utf-8;' }
   )
 
-  saveAs(blob, `${props.role}_data.csv`)
+  saveAs(blob, `${role.value}_data.csv`)
 }
 </script>
 
 <style scoped>
-/* 样式可根据需求修改 */
+/* Customize styles as needed */
 </style>
