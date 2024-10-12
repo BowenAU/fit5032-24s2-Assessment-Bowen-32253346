@@ -4,10 +4,12 @@
         <div class="footer-section">
           <h5>About MigrantCare</h5>
           <ul>
-            <li><router-link to="/about">About Us</router-link></li>
-            <li><router-link to="/contactus">Contact Us</router-link></li>
             <li><router-link to="/review">Review</router-link></li>
             <li><router-link to="/askus">Ask Us</router-link></li>
+            <li><router-link to="/about">About Us</router-link></li>
+            <li><router-link to="/contactus">Contact Us</router-link></li>
+            
+            
           </ul>
         </div>
         <div class="footer-section">
@@ -35,7 +37,7 @@
   
   <script>
   export default {
-    name: 'Footer'
+    name: 'AllFooter'
   }
   </script>
   

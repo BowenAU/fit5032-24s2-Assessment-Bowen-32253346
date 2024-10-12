@@ -1,13 +1,13 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import AllHeader from './components/AllHeader.vue'
-import Footer from './components/Footer.vue'
+import AllFooter from './components/AllFooter.vue';
 </script>
 
 <template>
   <AllHeader />
   <RouterView />
-  <Footer /> 
+  <AllFooter /> 
 </template>
 
 <style scoped></style>
