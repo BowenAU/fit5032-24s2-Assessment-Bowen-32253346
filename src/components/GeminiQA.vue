@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h1 class="mb-5">Hello, I'm Gemini AI. Ask me anything!</h1>
+        <h1 class="mb-5">Ask Your Own Question</h1>
 
         <!-- 问题提交表单 -->
         <form class="mb-5" @submit.prevent="fetchAnswer">
             <div>
-                <textarea name="question" id="question" cols="30" rows="10" v-model="question"></textarea>
+                <textarea name="question" id="question" cols="105" rows="5" v-model="question"></textarea>
             </div>
             <button type="submit" :disabled="!question">
                 {{ isLoading ? 'Asking Gemini...' : 'Ask' }}
