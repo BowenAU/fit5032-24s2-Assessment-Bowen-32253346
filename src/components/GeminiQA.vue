@@ -3,7 +3,7 @@
     <h1 class="mb-5">Ask Your Own Question</h1>
 
     <!-- 问题提交表单 -->
-    <form class="mb-5" @submit.prevent="fetchAnswer">
+    <form class="mb-5" @submit.prevent="fetchAnswer" role="form">
       <div>
         <label for="question" class="sr-only">Type your question here</label>
         <textarea
@@ -13,18 +13,20 @@
           rows="5"
           v-model="question"
           placeholder="Type your question here..."
-          aria-label="Ask your question"
+          aria-labelledby="ask-question-label"
         ></textarea>
       </div>
-      <button
-        type="submit"
-        :disabled="!question"
-        :aria-busy="isLoading"
-        aria-live="polite"
-        class="ask-button"
-      >
-        {{ isLoading ? 'Asking Gemini...' : 'Ask' }}
-      </button>
+      <div class="button-container">
+        <button
+          type="submit"
+          :disabled="!question"
+          :aria-busy="isLoading"
+          aria-live="polite"
+          class="ask-button"
+        >
+          {{ isLoading ? 'Asking Gemini...' : 'Ask' }}
+        </button>
+      </div>
     </form>
 
     <!-- 回答显示区域 -->
@@ -33,8 +35,8 @@
     </div>
 
     <!-- 错误提示 -->
-    <div v-if="errorMessage" class="error-message">
-      <p>{{ errorMessage }}</p>
+    <div v-if="errorMessage" class="error-message" role="alert" aria-live="assertive">
+      <p><i class="error-icon">⚠️</i>{{ errorMessage }}</p>
     </div>
   </div>
 </template>
@@ -110,6 +112,12 @@ textarea:focus {
   box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .ask-button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -125,12 +133,18 @@ textarea:focus {
 }
 
 .ask-button:disabled {
-  background-color: #ccc;
+  background-color: #999; /* 调整禁用状态下的颜色，确保对比度满足 3:1 */
   cursor: not-allowed;
 }
 
 .error-message {
   color: red;
   font-size: 1.2em;
+  display: flex;
+  align-items: center;
+}
+
+.error-icon {
+  margin-right: 10px;
 }
 </style>
