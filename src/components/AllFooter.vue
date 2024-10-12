@@ -1,34 +1,40 @@
 <template>
   <footer class="footer-container">
     <div class="footer-content">
+      <!-- 图片添加到左侧空白区域 -->
+      <div class="footer-image">
+        <img src="@/assets/MedicalEmergencySymbol.png" alt="Medical Emergency Symbol" />
+      </div>
+      
       <div class="footer-section">
-        <h5>About MigrantCare</h5>
+        <h3>About MigrantCare</h3>
         <ul>
-          <li><router-link to="/review">Review</router-link></li>
           <li><router-link to="/askus">Ask Us</router-link></li>
           <li><router-link to="/about">About Us</router-link></li>
           <li><router-link to="/contactus">Contact Us</router-link></li>
+          <li><router-link to="/review">Give Feedback</router-link></li>
         </ul>
       </div>
+      
       <div class="footer-section">
-        <h5>Our Services</h5>
+        <h3>Our Services</h3>
         <ul>
           <li><router-link to="/service/language-learning">Language Learning</router-link></li>
           <li><router-link to="/service/career-resources">Career Resources</router-link></li>
           <li><router-link to="/service/health-info">Health Information</router-link></li>
-          <li>
-            <router-link to="/service/cultural-integration">Cultural Integration</router-link>
-          </li>
+          <li><router-link to="/service/cultural-integration">Cultural Integration</router-link></li>
         </ul>
       </div>
+      
       <div class="footer-section">
-        <h5>Get in Touch</h5>
+        <h3>Get in Touch</h3>
         <p><strong>Email:</strong> bowen@migrantcare.org</p>
         <p><strong>Phone:</strong> (61) 0431 666 861</p>
         <p><strong>Address:</strong> Wellington Rd, Clayton VIC 3168</p>
         <p><strong>Opening hours:</strong> Monday to Friday 8am - 12am</p>
       </div>
     </div>
+    
     <div class="footer-bottom">
       <p>&copy; 2024 S2 FIT5032 Bowen MigrantCare. All Rights Reserved.</p>
     </div>
@@ -54,7 +60,21 @@ export default {
   flex-wrap: wrap;
 }
 
+.footer-image {
+  display: flex;
+  justify-content: flex-start;   /* 使图片靠左对齐 */
+  align-items: center;           /* 垂直居中 */
+  flex: 1;                       /* 占据左侧空白区域 */
+  margin-left: 130px;             /* 增加左外边距，控制图片向右移动的距离 */
+}
+
+.footer-image img {
+  max-width: 100px; /* 设置图片最大宽度 */
+  height: auto;
+}
+
 .footer-section {
+  flex-grow: 1;                    /* 让内容部分占据剩余的空间 */
   margin: 10px 0;
 }
 
