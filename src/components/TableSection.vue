@@ -10,7 +10,6 @@
       filterDisplay="row"
     >
       <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-      <!-- ID column, add search box -->
       <Column field="id" header="ID" style="min-width: 12rem" sortable>
         <template #filter="{ filterModel, filterCallback }">
           <InputText
@@ -20,7 +19,6 @@
           />
         </template>
       </Column>
-      <!-- Email column, add search box -->
       <Column field="email" header="Email" style="min-width: 12rem" sortable>
         <template #filter="{ filterModel, filterCallback }">
           <InputText
@@ -30,7 +28,16 @@
           />
         </template>
       </Column>
-      <Column field="role" header="Role" style="min-width: 12rem"></Column>
+  
+      <Column field="role" header="Role" style="min-width: 12rem" sortable>
+        <template #filter="{ filterModel, filterCallback }">
+          <InputText
+            v-model="filterModel.value"
+            @input="filterCallback()"
+            placeholder="Search by Role"
+          />
+        </template>
+      </Column>
     </DataTable>
 
     <div class="mt-3">
@@ -54,8 +61,10 @@ import Column from 'primevue/column'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import axios from 'axios'
+import emailjs from 'emailjs-com'
 
-// props
+emailjs.init('woIvKzjWPZjbeCrVo')
+
 const props = defineProps({
   role: String
 })
@@ -65,14 +74,37 @@ const data = ref([])
 const selectedData = ref([])
 const filters = ref({
   id: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  email: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
+  email: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+  role: { value: null, matchMode: FilterMatchMode.CONTAINS } 
 })
 
-const sendEmailsToSelected = () => {
-  console.log(selectedData.value)
+const sendEmailsToSelected = async () => {
+  if (selectedData.value.length > 0) {
+    try {
+      const emailPromises = selectedData.value.map((item) => {
+        return emailjs.send(
+          'service_Bowen5032',
+          'template_emqvjc3',
+          {
+            to_name: item.id,
+            from_name: 'FIT5032_Bowen',
+            message: 'We hope this message finds you well! We wanted to let you know that we will be holding offline events in the near future. To learn more about this event, please visit our website!',
+            to_email: item.email
+          }
+        )
+      })
+
+      await Promise.all(emailPromises)
+      alert('Emails sent successfully!')
+    } catch (error) {
+      console.log(error)
+      alert('Failed to send email. Please try again later.')
+    }
+  } else {
+    alert('Please select at least one user to send emails.')
+  }
 }
 
-// Independent data acquisition function
 const fetchData = async (functionUrl) => {
   try {
     const response = await axios.get(functionUrl)
@@ -83,7 +115,6 @@ const fetchData = async (functionUrl) => {
   }
 }
 
-// Use 'watch' to monitor 'role' changes and get data
 watch(
   () => role.value,
   (newRole) => {
@@ -96,23 +127,22 @@ watch(
   { immediate: true }
 )
 
-// Use 'onMounted' to call the data fetch function
 onMounted(() => {
   fetchData('https://getusers-o2v7rvex2q-uc.a.run.app')
 })
 
-// Filtered data
 const filteredData = computed(() => {
   const idFilter = filters.value.id.value?.toLowerCase() || ''
   const emailFilter = filters.value.email.value?.toLowerCase() || ''
+  const roleFilter = filters.value.role.value?.toLowerCase() || ''
   return data.value.filter(
     (item) =>
       (!idFilter || item.id.toLowerCase().startsWith(idFilter)) &&
-      (!emailFilter || item.email.toLowerCase().startsWith(emailFilter))
+      (!emailFilter || item.email.toLowerCase().startsWith(emailFilter)) &&
+      (!roleFilter || item.role.toLowerCase().includes(roleFilter))
   )
 })
 
-// Export the CSV function
 function exportCSV() {
   const csvData = selectedData.value
     .map((row) =>
