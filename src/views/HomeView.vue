@@ -104,36 +104,36 @@ export default {
 <style scoped>
 .carousel-container {
   width: 80%;
-  margin: 80px auto; /* 保持与导航栏的距离 */
-  padding: 20px; /* 为整个轮播区域添加填充 */
+  margin: 80px auto; 
+  padding: 20px; 
 }
 
 .slide-content {
   text-align: center;
-  padding: 10px; /* 添加内容间距 */
+  padding: 10px; 
 }
 
 .slide-image {
   width: 100%;
-  height: 350px; /* 统一图片高度 */
-  object-fit: cover; /* 确保图片按比例填充容器 */
-  border-radius: 10px; /* 保持圆角 */
+  height: 350px; 
+  object-fit: cover; 
+  border-radius: 10px; 
 }
 
 h3 {
-  margin: 15px 0 5px; /* 保持标题和内容间的适当距离 */
+  margin: 15px 0 5px; 
   font-size: 22px;
   font-weight: bold;
 }
 
 p {
-  font-size: 14px; /* 调整描述字体大小 */
-  line-height: 1.6; /* 增加行间距以提高可读性 */
-  margin: 0 15px; /* 增加文字的左右内边距 */
+  font-size: 14px; 
+  line-height: 1.6; 
+  margin: 0 15px; 
 }
 
 .carousel .carousel__slide {
-  padding: 0 20px; /* 增加轮播间的左右间距 */
+  padding: 0 20px; 
 }
 
 .carousel__pagination {

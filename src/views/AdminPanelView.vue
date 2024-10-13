@@ -15,8 +15,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import Menubar from 'primevue/menubar' // 按需导入 Menubar 组件
-import TableSection from '../components/TableSection.vue' // 按需导入表格组件
+import Menubar from 'primevue/menubar' 
+import TableSection from '../components/TableSection.vue' 
 
 const items = [
   {

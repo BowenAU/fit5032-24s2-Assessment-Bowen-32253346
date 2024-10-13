@@ -8,13 +8,12 @@ import axios from 'axios'
 
 const jsonData = ref()
 
-// 独立数据获取函数
 const fetchData = async (functionUrl) => {
   try {
     const response = await axios.get(functionUrl)
     jsonData.value = response.data
   } catch (error) {
-    console.error('获取数据时出错:', error)
+    console.error('Error fetching data:', error)
   }
 }
 

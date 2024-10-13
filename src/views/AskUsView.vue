@@ -100,7 +100,6 @@ export default {
     }
   },
   methods: {
-    // 切换常见问题回答的显示和隐藏
     toggleAnswer(index) {
       this.faqs[index].show = !this.faqs[index].show
     }
@@ -128,7 +127,7 @@ h1 {
 p {
   text-align: center;
   font-size: 1.2em;
-  color: #333; /* 提高对比度 */
+  color: #333; 
   margin-bottom: 30px;
 }
 
@@ -148,7 +147,7 @@ p {
 }
 
 .faq-section li {
-  background-color: #0056b3; /* 提高对比度 */
+  background-color: #0056b3; 
   color: white;
   padding: 15px;
   margin-bottom: 10px;
@@ -158,11 +157,11 @@ p {
 }
 
 .faq-section li:focus {
-  background-color: #003a80; /* 焦点样式 */
+  background-color: #003a80; 
 }
 
 .faq-section li:hover {
-  background-color: #003a80; /* 悬停时更深的颜色 */
+  background-color: #003a80; 
 }
 
 .faq-section p {
@@ -181,14 +180,14 @@ textarea {
   max-width: 800px;
   padding: 15px;
   font-size: 1.1em;
-  border: 2px solid #0056b3; /* 改为更高对比度的边框 */
+  border: 2px solid #0056b3; 
   border-radius: 5px;
   margin-bottom: 10px;
   color: #333;
 }
 
 textarea:focus {
-  outline: 3px solid #003a80; /* 增加焦点状态 */
+  outline: 3px solid #003a80; 
 }
 
 button {

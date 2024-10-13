@@ -75,10 +75,10 @@ export default {
         email: '',
         message: ''
       },
-      start: '', // 用户的当前位置
-      end: [145.1346, -37.9119], // Monash 大学的坐标
-      customStart: '', // 用户自定义的开始位置
-      customEnd: '', // 用户自定义的结束位置
+      start: '', 
+      end: [145.1346, -37.9119], // Monash Uni
+      customStart: '', 
+      customEnd: '', 
       map: null,
       marker: null
     }
@@ -87,11 +87,11 @@ export default {
     submitForm() {
       alert(`Message sent! Name: ${this.form.name}, Email: ${this.form.email}`)
     },
-    // 获取用户当前位置并显示路线
+
     async getDirections() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async (position) => {
-          this.start = [position.coords.longitude, position.coords.latitude] // 用户当前位置
+          this.start = [position.coords.longitude, position.coords.latitude] 
 
           const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${this.start};${this.end}?geometries=geojson&access_token=${mapboxgl.accessToken}`
           const response = await axios.get(url)
@@ -103,7 +103,7 @@ export default {
         alert('Geolocation is not supported by this browser.')
       }
     },
-    // 根据自定义的起点和终点显示路线
+
     async getCustomDirections() {
       const startPoint = await axios.get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.customStart}.json?access_token=${mapboxgl.accessToken}`
@@ -121,7 +121,7 @@ export default {
 
       this.displayRoute(data)
     },
-    // 显示路线
+ 
     displayRoute(data) {
       if (this.map.getSource('route')) {
         this.map.getSource('route').setData({
@@ -152,7 +152,7 @@ export default {
         })
       }
 
-      // 自动调整地图视图以显示整个路线
+ 
       const coordinates = data.coordinates
       const bounds = coordinates.reduce(
         function (bounds, coord) {
@@ -165,19 +165,16 @@ export default {
     }
   },
   mounted() {
-    // 使用提供的 Mapbox API token
     mapboxgl.accessToken =
       'pk.eyJ1IjoiYm93ZW5mb3I1MDMyIiwiYSI6ImNtMjFsNjJwbDB0aWgycnB3aHMybXozZWYifQ.q911974r6pJP1Q-N4crdhA'
 
-    // 初始化地图
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [145.1346, -37.9119], // Monash 大学 Clayton 校区
+      center: [145.1346, -37.9119], // Monash Clayton
       zoom: 12
     })
 
-    // 添加 Monash 大学的标记
     new mapboxgl.Marker().setLngLat([145.1346, -37.9119]).addTo(this.map)
   }
 }

@@ -1,12 +1,13 @@
 <template>
   <div class="card">
+    <!-- Title displays based on the role: User or Volunteer -->
     <h2>{{ role === 'user' ? 'User' : 'Volunteer' }} Charts</h2>
 
+    <!-- Container for displaying charts -->
     <div class="charts-container">
-      <!-- 左侧的柱状图或饼状图 -->
+      <!-- Left chart: Bar or Pie chart depending on data -->
       <Chart :type="chartType1" :data="chartData1" :options="chartOptions1" class="chart-item" />
-
-      <!-- 右侧的饼状图或柱状图 -->
+      <!-- Right chart: Pie or Bar chart depending on data -->
       <Chart :type="chartType2" :data="chartData2" :options="chartOptions2" class="chart-item" />
     </div>
   </div>
@@ -17,24 +18,25 @@ import { ref, watch, onMounted } from 'vue'
 import Chart from 'primevue/chart'
 import axios from 'axios'
 
-// props
+// Props to determine the role, either 'user' or 'volunteer'
 const props = defineProps({
   role: String
 })
 
+// Chart data and configuration for both charts
 const chartData1 = ref({})
 const chartData2 = ref({})
-const chartType1 = ref('bar')
-const chartType2 = ref('pie')
+const chartType1 = ref('bar') // Default type for the first chart
+const chartType2 = ref('pie') // Default type for the second chart
 const chartOptions1 = ref({
   responsive: true,
   plugins: {
     legend: {
-      position: 'top'
+      position: 'top' // Legend is positioned at the top
     },
     tooltip: {
       mode: 'index',
-      intersect: false
+      intersect: false // Tooltip displays information on hover
     }
   }
 })
@@ -42,12 +44,12 @@ const chartOptions2 = ref({
   responsive: true,
   plugins: {
     legend: {
-      position: 'top'
+      position: 'top' // Legend is positioned at the top
     }
   }
 })
 
-// 从云函数获取数据
+// Function to fetch data from cloud function
 async function fetchData(functionUrl) {
   try {
     const response = await axios.get(functionUrl)
@@ -114,6 +116,8 @@ async function fetchData(functionUrl) {
     console.error('Error fetching data:', error)
   }
 }
+
+// Watcher to fetch data based on the role change (user or volunteer)
 watch(
   () => props.role,
   (newRole) => {
@@ -125,7 +129,8 @@ watch(
   },
   { immediate: true }
 )
-// 组件挂载时获取数据
+
+// Fetch data when the component is mounted
 onMounted(() => {
   fetchData('https://getusers-jph42zefya-uc.a.run.app')
 })

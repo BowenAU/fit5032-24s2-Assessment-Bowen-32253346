@@ -10,7 +10,7 @@
       filterDisplay="row"
     >
       <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-      <!-- ID 列，添加搜索框 -->
+      <!-- ID column, add search box -->
       <Column field="id" header="ID" style="min-width: 12rem" sortable>
         <template #filter="{ filterModel, filterCallback }">
           <InputText
@@ -20,7 +20,7 @@
           />
         </template>
       </Column>
-      <!-- Email 列，添加搜索框 -->
+      <!-- Email column, add search box -->
       <Column field="email" header="Email" style="min-width: 12rem" sortable>
         <template #filter="{ filterModel, filterCallback }">
           <InputText
@@ -72,18 +72,18 @@ const sendEmailsToSelected = () => {
   console.log(selectedData.value)
 }
 
-// 独立数据获取函数
+// Independent data acquisition function
 const fetchData = async (functionUrl) => {
   try {
     const response = await axios.get(functionUrl)
     data.value = response.data
     console.log(response)
   } catch (error) {
-    console.error('获取数据时出错:', error)
+    console.error('Error fetching data:', error)
   }
 }
 
-// 使用 `watch` 来监视 `role` 变化并获取数据
+// Use 'watch' to monitor 'role' changes and get data
 watch(
   () => role.value,
   (newRole) => {
@@ -96,12 +96,12 @@ watch(
   { immediate: true }
 )
 
-// 使用 `onMounted` 来调用数据获取函数
+// Use 'onMounted' to call the data fetch function
 onMounted(() => {
   fetchData('https://getusers-o2v7rvex2q-uc.a.run.app')
 })
 
-// 过滤后的数据
+// Filtered data
 const filteredData = computed(() => {
   const idFilter = filters.value.id.value?.toLowerCase() || ''
   const emailFilter = filters.value.email.value?.toLowerCase() || ''
@@ -112,7 +112,7 @@ const filteredData = computed(() => {
   )
 })
 
-// 导出 CSV 功能
+// Export the CSV function
 function exportCSV() {
   const csvData = selectedData.value
     .map((row) =>
@@ -132,5 +132,4 @@ function exportCSV() {
 </script>
 
 <style scoped>
-/* Customize styles as needed */
 </style>

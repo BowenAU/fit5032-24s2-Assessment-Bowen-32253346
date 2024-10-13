@@ -1,11 +1,13 @@
 <template>
+  <!-- Footer container wraps all the footer content -->
   <footer class="footer-container">
     <div class="footer-content">
-      <!-- 图片添加到左侧空白区域 -->
+      <!-- Footer image section displaying the Medical Emergency Symbol -->
       <div class="footer-image">
         <img src="@/assets/MedicalEmergencySymbol.png" alt="Medical Emergency Symbol" />
       </div>
       
+      <!-- About MigrantCare section links to other pages -->
       <div class="footer-section">
         <h3>About MigrantCare</h3>
         <ul>
@@ -16,6 +18,7 @@
         </ul>
       </div>
       
+      <!-- Services section listing the available services -->
       <div class="footer-section">
         <h3>Our Services</h3>
         <ul>
@@ -26,6 +29,7 @@
         </ul>
       </div>
       
+      <!-- Get in Touch section providing contact information -->
       <div class="footer-section">
         <h3>Get in Touch</h3>
         <p><strong>Email:</strong> bowen@migrantcare.org</p>
@@ -35,6 +39,7 @@
       </div>
     </div>
     
+    <!-- Footer bottom with copyright notice -->
     <div class="footer-bottom">
       <p>&copy; 2024 S2 FIT5032 Bowen MigrantCare. All Rights Reserved.</p>
     </div>
@@ -43,71 +48,80 @@
 
 <script>
 export default {
-  name: 'AllFooter'
+  name: 'AllFooter' // Name of the footer component
 }
 </script>
 
 <style scoped>
+/* Styles for the footer container */
 .footer-container {
   background-color: #007bff;
   padding: 20px;
   color: white;
 }
 
+/* Layout styles for the footer content */
 .footer-content {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 
+/* Styling for the image in the footer */
 .footer-image {
   display: flex;
-  justify-content: flex-start;   /* 使图片靠左对齐 */
-  align-items: center;           /* 垂直居中 */
-  flex: 1;                       /* 占据左侧空白区域 */
-  margin-left: 130px;             /* 增加左外边距，控制图片向右移动的距离 */
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+  margin-left: 130px;
 }
 
 .footer-image img {
-  max-width: 100px; /* 设置图片最大宽度 */
+  max-width: 100px;
   height: auto;
 }
 
+/* General styles for the footer sections */
 .footer-section {
-  flex-grow: 1;                    /* 让内容部分占据剩余的空间 */
+  flex-grow: 1;
   margin: 10px 0;
 }
 
+/* Styling for the section headings */
 .footer-section h5 {
   margin-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
 }
 
+/* Resetting default list styles and padding */
 .footer-section ul {
   list-style-type: none;
   padding: 0;
 }
 
+/* Styling for the list items */
 .footer-section ul li {
   margin-bottom: 8px;
 }
 
+/* Styling for the links within the list */
 .footer-section ul li a {
   color: white;
   text-decoration: none;
 }
 
+/* Adding hover effect to links */
 .footer-section ul li a:hover {
   text-decoration: underline;
 }
 
+/* Styling for the footer bottom section */
 .footer-bottom {
   text-align: center;
   margin-top: 20px;
   border-top: 1px solid white;
   padding-top: 10px;
   font-size: 14px;
-  /* 提高文字的可读性 */
 }
 </style>

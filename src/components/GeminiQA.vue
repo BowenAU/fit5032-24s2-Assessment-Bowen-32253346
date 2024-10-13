@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div>   
+    <!-- Title for the question submission form -->
     <h1 class="mb-5">Ask Your Own Question</h1>
 
-    <!-- 问题提交表单 -->
+    <!-- Question submission form -->
     <form class="mb-5" @submit.prevent="fetchAnswer" role="form">
       <div>
+        <!-- Label for accessibility, screen-reader only -->
         <label for="question" class="sr-only">Type your question here</label>
+        <!-- Textarea input for user to type their question -->
         <textarea
           name="question"
           id="question"
@@ -16,6 +19,8 @@
           aria-labelledby="ask-question-label"
         ></textarea>
       </div>
+
+      <!-- Submit button container -->
       <div class="button-container">
         <button
           type="submit"
@@ -29,12 +34,12 @@
       </div>
     </form>
 
-    <!-- 回答显示区域 -->
+    <!-- Display area for the answer -->
     <div class="mb-10">
       <p v-if="answer">{{ answer }}</p>
     </div>
 
-    <!-- 错误提示 -->
+    <!-- Error message display in case of failure -->
     <div v-if="errorMessage" class="error-message" role="alert" aria-live="assertive">
       <p><i class="error-icon">⚠️</i>{{ errorMessage }}</p>
     </div>
@@ -52,7 +57,7 @@ export default {
     const isLoading = ref(false)
     const errorMessage = ref('')
 
-    // 调用 Gemini AI API 获取回答
+    // Function to fetch the answer using Google Gemini AI API
     const fetchAnswer = async () => {
       answer.value = ''
       errorMessage.value = ''
@@ -88,6 +93,8 @@ export default {
 </script>
 
 <style scoped>
+
+/* Margin styles */
 .mb-5 {
   margin-bottom: 5rem;
 }
@@ -96,6 +103,7 @@ export default {
   margin-bottom: 10rem;
 }
 
+/* Textarea styles for question input */
 textarea {
   width: 100%;
   max-width: 900px;
@@ -112,12 +120,14 @@ textarea:focus {
   box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
 }
 
+/* Button container styles */
 .button-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Submit button styles */
 .ask-button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -133,10 +143,11 @@ textarea:focus {
 }
 
 .ask-button:disabled {
-  background-color: #999; /* 调整禁用状态下的颜色，确保对比度满足 3:1 */
+  background-color: #999; 
   cursor: not-allowed;
 }
 
+/* Error message styles */
 .error-message {
   color: red;
   font-size: 1.2em;

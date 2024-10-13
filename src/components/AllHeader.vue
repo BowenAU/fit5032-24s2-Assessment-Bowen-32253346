@@ -1,21 +1,28 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="Main Navigation">
+    <!-- A skip link for keyboard and screen reader users to quickly navigate to main content -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Left section of the navbar, contains brand logo and site name -->
     <div class="navbar-left">
       <div class="navbar-brand">
+        <!-- Company logo image -->
         <img
           src="@/assets/MedicalEmergencySymbol.png"
           alt="Medical Emergency Symbol"
           class="navbar-logo"
         />
+        <!-- Link to home page -->
         <router-link to="/">MigrantCare</router-link>
       </div>
     </div>
+
+    <!-- Main navigation menu with various links -->
     <ul class="navbar-menu">
       <li><router-link to="/">Home</router-link></li>
       <li v-if="!isAuthenticated"></li>
 
-      <!-- 修复 "Our Services" 的样式 -->
+      <!-- Dropdown menu for authenticated users providing service links -->
       <li class="dropdown" v-if="isAuthenticated">
         <button aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
           <router-link to="/service"> Our Services</router-link>
@@ -30,17 +37,25 @@
         </ul>
       </li>
 
+      <!-- Links that are visible only to admin users and authenticated users -->
       <li><router-link to="/admin" v-if="role === 'admin'">Admin Panel View Page</router-link></li>
       <li><router-link to="/review" v-if="isAuthenticated">Review</router-link></li>
       <li><router-link to="/events" v-if="isAuthenticated">Events</router-link></li>
+
+      <!-- Links to public pages -->
       <li><router-link to="/about">About us</router-link></li>
       <li><router-link to="/askus">Ask us</router-link></li>
       <li><router-link to="/contactus">Contact us</router-link></li>
     </ul>
+
+    <!-- Right side of the navbar for authentication buttons -->
     <div class="navbar-right">
+      <!-- Login button for unauthenticated users -->
       <div v-if="!isAuthenticated" class="ml-3">
         <router-link to="/login"><Button label="Log in" severity="secondary" raised /></router-link>
       </div>
+
+      <!-- Dropdown for authenticated users displaying login info and logout option -->
       <div v-if="isAuthenticated">
         <SplitButton :model="items" severity="secondary">Login as {{ role }}</SplitButton>
       </div>
@@ -54,6 +69,8 @@ import { role, isAuthenticated } from '../router/index.js'
 import Button from 'primevue/button'
 import SplitButton from 'primevue/splitbutton'
 const router = useRouter()
+
+// Dropdown options for authenticated users, includes a logout function
 const items = [
   {
     label: 'Logout',
@@ -67,7 +84,7 @@ const items = [
 </script>
 
 <style scoped>
-/* 导航栏样式 */
+/* General styles for the navbar */
 .navbar {
   background-color: #0074cc;
   padding: 15px 30px;
@@ -77,6 +94,7 @@ const items = [
   position: relative;
 }
 
+/* Styles for the skip link for better accessibility */
 .skip-link {
   position: absolute;
   left: -999px;
@@ -91,12 +109,13 @@ const items = [
   z-index: 1000;
 }
 
-/* 品牌样式 */
+/* Styles for the left section of the navbar, including the logo */
 .navbar-left {
   display: flex;
   align-items: center;
 }
 
+/* Brand styles including logo and site name */
 .navbar-brand {
   display: flex;
   align-items: center;
@@ -114,16 +133,14 @@ const items = [
   text-decoration: none;
 }
 
-/* 导航菜单样式 */
+/* Styles for the main navigation menu */
 .navbar-menu {
   list-style: none;
   display: flex;
   margin: 0;
   padding: 0;
   flex-grow: 1;
-  /* 让菜单占据中间位置 */
   justify-content: center;
-  /* 确保导航菜单居中 */
 }
 
 .navbar-menu li {
@@ -144,7 +161,7 @@ const items = [
   color: #ffcc33;
 }
 
-/* 修复 "Our Services" 样式 */
+/* Dropdown styles for the services menu */
 .dropdown {
   display: flex;
   align-items: center;
@@ -177,7 +194,6 @@ const items = [
   padding: 10px 20px;
   white-space: nowrap;
   text-align: center;
-  /* Center-aligns the text */
 }
 
 .dropdown:hover .dropdown-menu {
@@ -197,7 +213,7 @@ const items = [
   color: #ffcc33;
 }
 
-/* 搜索和用户部分 */
+/* Styles for the right section of the navbar, including the login/logout button */
 .navbar-right {
   display: flex;
   align-items: center;
@@ -228,7 +244,7 @@ const items = [
   background-color: #ff9933;
 }
 
-/* 用户下拉菜单样式 */
+/* Styles for the user dropdown menu */
 .user-dropdown {
   position: relative;
   margin-left: 20px;
