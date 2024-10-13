@@ -35,7 +35,7 @@
         <p><strong>Email:</strong> bowen@migrantcare.org</p>
         <p><strong>Phone:</strong> (61) 0431 666 861</p>
         <p><strong>Address:</strong> Wellington Rd, Clayton VIC 3168</p>
-        <p><strong>Opening hours:</strong> Monday to Friday 8am - 12am</p>
+        <p><strong>Opening hours:</strong> Monday to Sunday, 9am - 5pm</p>
       </div>
     </div>
     
