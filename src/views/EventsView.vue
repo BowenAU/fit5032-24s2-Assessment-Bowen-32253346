@@ -78,7 +78,7 @@ const sendEmail = async () => {
     await emailjs.send('service_Bowen5032', 'template_emqvjc3', {
       to_name: name.value,
       from_name: 'FIT5032_Bowen',
-      message: 'Hello',
+      message: 'We hope this message finds you well! We wanted to let you know that we will be holding offline events in the near future. To learn more about this event, please visit our website!',
       to_email: email.value
     })
     alert('Email sent successfully!')
