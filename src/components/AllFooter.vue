@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: 'AllFooter' // Name of the footer component
+  name: 'AllFooter' 
 }
 </script>
 
